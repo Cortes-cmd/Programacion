@@ -1,38 +1,37 @@
-productos=[]
+productos = []
 
-
-def añadir_producto (productos):
-   while True:
-      producto= input("Añade un producto")
-      producto["Nombre del producto"].lower()
-      perecedero=input("Es perecedero?").lower()
-      if perecedero == "si":
-          p_perecedero={
-             "Nombre": producto,
-             "perecedero": True
-         }
-          productos
-          return True
-          
+def añadir_producto ():
+      while True:
+         nproducto= input("Añade un producto \n")
+         perecedero=input("Es perecedero? si/no\n")
          
-      elif perecedero =="no":
-         productos["Perecedero"]= True
-         productos["Perecedero"]= False
-      Detener=input("Quieres detener la inclusion de productos a la lista?\n")
-      if Detener.lower()=="no":
-         añadir_producto(productos)
-      if Detener.lower() =="si":
-       break
-   return productos
-
-while True:
-   Detener=input("Quieres detener la inclusion de productos a la lista?\n")
-   if Detener.lower()=="no":
-      añadir_producto(productos)
-   if Detener.lower() =="si":
-      break
-   
-print(dict(filter(añadir_producto,productos )))
+         if perecedero.lower() == "si":
+             producto_perecedero={
+             "Nombre":nproducto,
+             "Perecedero": True
+             }
+             productos.append(producto_perecedero)
+      
+         elif perecedero.lower()== "no":
+             producto_inperecedero={
+             "Nombre":nproducto,
+             "Perecedero": False
+             }
+             productos.append(producto_inperecedero)
+         Detener=input("Quieres detener la inclusion de productos a la lista? si/no \n")
+         if Detener.lower()=="si":
+            break
 
 
 
+
+def Es_Perecedero(producto):
+    return producto["Perecedero"]
+
+añadir_producto()
+perecederos=list(filter(Es_Perecedero,productos))
+
+print(f"Los nombres de los productos perecederos son;\n")
+
+for producto in perecederos:
+    print(producto["Nombre"],"\n")
