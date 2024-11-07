@@ -1,4 +1,4 @@
-import Funciones_sql_categorias as bdd
+import Conexion_Padre as bdd
 
 conexion=bdd.conectar("supermercado")
 
