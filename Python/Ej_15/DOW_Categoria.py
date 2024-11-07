@@ -40,7 +40,7 @@ def select_categoria (conexion,cursor):
 def modify_categoria (conexion,cursor):
     try:
         idcategoria=int(input("Selecciona el idcategoria que deseas modificar"))
-        categoria=(input("Dime que nombre quieres darle a la categoria"))
+        categoria=(input("Dime que nombre quieres darle a la categoria\n"))
 
         consulta=(f"update categoria set categoria = %s where idcategoria = %s")
 
