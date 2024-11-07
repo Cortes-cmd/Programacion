@@ -12,4 +12,7 @@ def insert_categoria (conexion,cursor):
 
         
 
-    except ValueError:
+    except ValueError as e:
+        print("Error al insertar registro en categoria")
+    except Exception as e:
+        
