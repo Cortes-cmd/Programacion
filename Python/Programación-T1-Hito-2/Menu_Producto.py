@@ -3,10 +3,10 @@ import DOW_Producto as dwp
 def Menu (conexion,cursor):
     try:
         while True:
-            opcion=int(input("Menú de opciones \n1/Insertar nuevo producto\n2/Seleccionar todos los productos\n3/Modificar producto\n4/Eliminar producto\n5/Salir"))
+            opcion=int(input("Menú de opciones \n1/Comprar producto\n2/Seleccionar todos los productos\n3/Modificar producto\n4/Eliminar producto\n5/Salir"))
             match opcion:
                 case 1: 
-                    print("Insertar producto")
+                    print("Comprar producto")
                     dwp.insert_producto(conexion,cursor)
                 case 2:
                     print("Seleccionar todos los productos")

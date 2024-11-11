@@ -1,5 +1,6 @@
 import Conexion_Padre as bdd
 
-conexion=bdd.conectar("supermercado")
+conexion=bdd.conectar("SupermercadoPython")
 
 cursor= conexion.cursor()
+
