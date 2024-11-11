@@ -12,7 +12,7 @@ def Menu (conexion,cursor):
                     dwp.insert_producto(conexion,cursor)
                 case 2:
                     print("Seleccionar todos los productos")
-                    dwp.select_producto(conexion,cursor)
+                    dwp.select_producto(cursor)
                 case 3:
                     print("Modificar producto")
                     dwp.modify_producto(conexion,cursor)

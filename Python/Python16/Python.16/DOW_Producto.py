@@ -23,7 +23,7 @@ def insert_producto (conexion,cursor):
     except Exception as unkown:
         print(f"No pudo ejecutarse la funcion, error {unkown}")
 
-def select_producto (conexion,cursor):
+def select_producto (cursor):
     try:
         consulta="select * from producto order by idproducto"
 
