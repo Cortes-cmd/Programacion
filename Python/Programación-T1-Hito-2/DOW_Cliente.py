@@ -1,110 +1,104 @@
-
-def insert_cliente (conexion,cursor):
+#DEF FUNCION PARA INTRODUCIR CLIENTE A BASE DE DATOS
+def ingresar_cliente(conexion, cursor):
     try:
+        # SOLICITO ATRIBUTOS DE LA TABLA CLIENTE
+        idcliente = int(input("Seleccione su id: "))
+        Nombre = input("Ingrese su nombre: ")
+        ciudad = input("Dime la ciudad del nuevo cliente: ")
+        tlf = input("Ingrese su número de teléfono: ")
 
-        cia=input("Ingrese el nombre del nuevo cliente: ")
-        contacto=(input("Dime el nombre de contacto del nuevo cliente: "))
-        direccion=(input("Dime la direccion del nuevo cliente: "))
-        ciudad=(input("Dime la ciudad del nuevo cliente: "))
-        region=(input("Dime la region del nuevo cliente: "))
-        pais=(input("Dime el pais del nuevo cliente: "))
-        consulta="insert into cliente(idcliente,cia,contacto,cargo,direccion,ciudad,region,cp,pais,tlf,fax) values(%s,%s,%s,%s,%s,%s,%s,%s)"
-
-        cursor.execute(consulta,(cia,contacto,direccion,ciudad,region,pais))
+        # LOS INSERTO EN SENTENCIA SQL Y EJECUTO
+        consulta = "INSERT INTO cliente(idcliente, Nombre, ciudad, tlf) VALUES (%s, %s, %s, %s)"
+        cursor.execute(consulta, (idcliente, Nombre, ciudad, tlf))
 
         conexion.commit()
 
-        #Faltaría crear el txt y que meta los datos en un array
+        # GUARDO LA INSERCION EN UN ARRAY, Y ESTE LO PRINTEO EN UN ARCHIVO
+        array = [idcliente, Nombre, ciudad, tlf]
+        with open("Clientes.txt", "a") as archivo:
+            archivo.write("=== Lista de Clientes ===\n")
+            archivo.write("Datos insertados:\n\n")
+            for dato in array:
+                archivo.write(f"{dato}\n")
 
-        print(f"Se insertó en la base de datos el cliente: {cia}\n con el nombre de contacto : {contacto}\n\n con la direccion: {direccion}\n la ciudad: {ciudad}\n la region: {region}\n que vive en el pais {pais}\n")
+        print(f"Se insertó en la base de datos el cliente: {Nombre} de la ciudad: {ciudad} con el número {tlf}")
 
+        #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
     except ValueError as e:
         print(f"Tipo de dato incorrecto, error {e}")
-    except Exception as unkown:
-        print(f"No pudo ejecutarse la funcion, error {unkown}")
+    except Exception as unknown:
+        print(f"No pudo ejecutarse la función, error {unknown}")
 
-def select_clientes (cursor):
+# DEF FUNCION PARA SELECCIONAR TODOS LOS CLIENTES RECOGIDOS (SOLO HACE FALTA CURSOR PORQUE ES SENTENCIA DE TIPO SELECT)
+def select_clientes(cursor):
     try:
-        consulta="select * from cliente order by idcliente"
-
+        # CONSULTO A TODOS LOS CLIENTES DE LA TABLA ORDENANDOLOS POR EL ID A TRAVES DE SENTENCIA SQL
+        consulta = "SELECT * FROM cliente ORDER BY idcliente"
         cursor.execute(consulta)
 
-        resultado=cursor.fetchall()
+        # PRINTEO A LOS CLIENTES RECOGIDOS
+        resultado = cursor.fetchall()
         for fila in resultado:
-             print(f"IDCliente: {fila[0]}, cia: {fila[1]}, contacto: {fila[2]}, cargo: {fila[3]}, direccion: {fila[4]}, ciudad: {fila[5]}, region: {fila[6]}, codigo postal: {fila[7]}, pais: {fila[8]}, tlf: {fila[9]}, fax: {fila[10]}")
+            print(f"IDCliente: {fila[0]}, Nombre: {fila[1]}, Ciudad: {fila[2]}, Teléfono: {fila[3]}")
 
-       
-
+        #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
     except ValueError as e:
         print(f"Tipo de dato incorrecto, error {e}")
-    except Exception as unkown:
-        print(f"No pudo ejecutarse la funcion, error {unkown}")
+    except Exception as unknown:
+        print(f"No pudo ejecutarse la función, error {unknown}")
 
-def select_cliente (cursor):
+# FUNCION PARA SELECCIONAR CLIENTE INDIVIDUAL (SENTENCIA SELECT POR LO QUE NO HACE FALTA CONEXION)
+def select_cliente(cursor):
     try:
+        # PIDO ID PARA SACAR SUS DATOS
+        idcliente = int(input("Dime el ID del cliente que quieres seleccionar: "))
 
-        idcliente=int(input("Dime el id del cliente que quieres seleccionar"))
+        # EXTRAIGO CADA DATO DEL CLIENTE CON EL ID DADO
+        consulta = "SELECT * FROM cliente WHERE idcliente = %s ORDER BY idcliente"
+        cursor.execute(consulta, (idcliente,))
 
-        consulta="select * from cliente where idcliente= %s"
-
-        cursor.execute(consulta(idcliente,))
-
-        resultado=cursor.fetchall()
+        # LOS IMPRIMO
+        resultado = cursor.fetchall()
         for fila in resultado:
-             print(f"IDCliente: {fila[0]}, cia: {fila[1]}, contacto: {fila[2]}, cargo: {fila[3]}, direccion: {fila[4]}, ciudad: {fila[5]}, region: {fila[6]}, codigo postal: {fila[7]}, pais: {fila[8]}, tlf: {fila[9]}, fax: {fila[10]}")
+            print(f"IDCliente: {fila[0]}, Nombre: {fila[1]}, Ciudad: {fila[2]}, Teléfono: {fila[3]}")
 
-       
-
+        #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
     except ValueError as e:
         print(f"Tipo de dato incorrecto, error {e}")
-    except Exception as unkown:
-        print(f"No pudo ejecutarse la funcion, error {unkown}")
+    except Exception as unknown:
+        print(f"No pudo ejecutarse la función, error {unknown}")
 
-
-def modify_cliente (conexion,cursor):
+# DEF FUNCION PARA MOSTRAR LOS DATOS DE LAS COMPRAS O PEDIDOS DE UN SOLO CLIENTE
+def seguimiento_cliente(cursor):
     try:
-        cia=input("Ingrese el nombre del nuevo cliente: ")
-        contacto=(input("Dime el nombre de contacto del nuevo cliente: "))
-        cargo=(input("Dime el cargo que ocupa el nuevo cliente: "))
-        direccion=(input("Dime la direccion del nuevo cliente: "))
-        ciudad=(input("Dime la ciudad del nuevo cliente: "))
-        region=(input("Dime la region del nuevo cliente: "))
-        cp=int(input("Dime el Codigo Postal del nuevo cliente: "))
-        pais=(input("Dime el pais del nuevo cliente: "))
-        tlf=(input("Dime el telefono del nuevo cliente: "))
-        fax=(input("Dime el fax del nuevo cliente: "))
-        idcliente=(input("Dime la ID del cliente a cambiar: "))
+        # PIDO SU ID
+        idcliente = int(input("Introduce el ID del cliente para realizar un seguimiento: "))
 
-        consulta=(f"update cliente set cia = %s, contacto= %s, cargo= %s, direccion= %s, ciudad= %s, region= %s, cp= %s, pais= %s, tlf= %s, fax= %s where idcliente = %s")
+        # INNER JOINS DE LAS TABLAS DE LAS QUE SELECCIONO TODOS LOS DATOS SOBRE EL CLIENTE Y SUS PEDIDOS
+        consulta = """
+        SELECT c.idcliente, c.Nombre, c.ciudad, c.tlf, p.idpedido, prod.nombre, d.precio, d.unidades
+        FROM cliente c
+        JOIN pedido p ON c.idcliente = p.idcliente
+        JOIN detalle d ON d.idpedido = p.idpedido
+        JOIN producto prod ON prod.idproducto = d.idproducto
+        WHERE c.idcliente = %s
+        ORDER BY p.idpedido
+        """
+        #EJECUTO
+        cursor.execute(consulta, (idcliente,))
 
-        cursor.execute(consulta,(cia,contacto,cargo,direccion,ciudad,region,cp,pais,tlf,fax,idcliente))
+        # LOS PRINTEA
+        resultado = cursor.fetchall()
+        for fila in resultado:
+            print(f"ID Cliente: {fila[0]}")
+            print(f"Nombre: {fila[1]}")
+            print(f"Ciudad: {fila[2]}")
+            print(f"Teléfono: {fila[3]}")
+            print(f"Pedido ID: {fila[4]}")
+            print(f"Producto: {fila[5]}, Precio: {fila[6]}, Cantidad: {fila[7]}\n")
 
-        conexion.commit()
-
-        print(f"El cliente de id {idcliente} fue modificado al nombre: {cia}\n de contacto : {contacto}\n de cargo: {cargo}\n que vive en la direccion {direccion}\n en la ciudad {ciudad}\nen la region {region}\n de codigo postal {cp}\nen el pais {pais}\n con el telefono {tlf}\n y con el fax {fax}")
-
+        #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
     except ValueError as e:
-        print(f"Tipo de dato incorrecto, error {e}")
-    except Exception as unkown:
-        print(f"No pudo ejecutarse la funcion, error {unkown}")
-
-    
-def delete_cliente(conexion,cursor):
-    try:
-        idcliente=(input("Dime el id del cliente que deseas eliminar"))
-        
-        consulta=(f"delete from cliente where idcliente= %s;")
-        cursor.execute(consulta,(idcliente,))
-
-
-        
-        
-
-        conexion.commit()
-
-        print(f"El cliente con el id {idcliente} ha sido eliminado")
-    except ValueError as e:
-        print(f"Tipo de dato incorrecto, error {e}")
-    except Exception as unkown:
-        print(f"No pudo ejecutarse la funcion, error {unkown}")
-    
+        print(f"Error en la entrada de datos: {e}")
+    except Exception as unknown:
+        print(f"No pudo ejecutarse la función, error: {unknown}")

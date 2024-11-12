@@ -1,0 +1,4 @@
+=== Factura de Compra ===
+Detalles de la compra:
+
+El cliente con el id:2Y el nombre:Cortesana,Realizo la compra del producto con el id:74 ,A un precio de:10 En la cantidad de :8

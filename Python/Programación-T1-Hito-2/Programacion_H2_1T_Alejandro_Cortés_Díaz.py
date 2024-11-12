@@ -1,10 +1,14 @@
-
+# IMPORTO CONEXION
 import Conexion as Cx
 
+# IMPORTO MAIN MENU
 import Menu_Main as Mm
 
-conexion=Cx.conexion
+# ASIGNO CONEXION A CONEXION PARA UTILIZAR SUS FUNCIONES CON LA BASE DE DATOS
+conexion = Cx.conexion
 
-cursor=Cx.cursor
+# ASIGNO CURSOR A CURSOR PARA HACER EXECUTES
+cursor = Cx.cursor
 
-Mm.Menu(conexion,cursor)
+# LLAMO A MENU MAIN PARA PODER USAR CURSOR Y CONEXION EN EL
+Mm.Menu(conexion, cursor)

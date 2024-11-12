@@ -1,28 +1,32 @@
+# IMPORTO DOW PRODUCTO PARA USARLO EN LOS DISTINTOS CASES
 import DOW_Producto as dwp
 
-def Menu (conexion,cursor):
+# DEFINO MENU
+def Menu(conexion, cursor):
     try:
+       
         while True:
-            opcion=int(input("Menú de opciones \n1/Comprar producto\n2/Seleccionar todos los productos\n3/Modificar producto\n4/Eliminar producto\n5/Salir"))
+            # OPCIONES
+            opcion = int(input("Menú de opciones \n1/Comprar producto\n2/Seleccionar todos los productos\n3/Seleccionar un producto en particular\n5/Salir"))
+            
+            # SEGUN LA OPCION UNA FUNCION PARA LA NECESIDAD CORRESPONDIENTE
             match opcion:
                 case 1: 
                     print("Comprar producto")
-                    dwp.insert_producto(conexion,cursor)
+                    dwp.compra_producto(conexion, cursor)
                 case 2:
                     print("Seleccionar todos los productos")
-                    dwp.select_producto(cursor)
+                    dwp.select_productos(cursor)
                 case 3:
-                    print("Modificar producto")
-                    dwp.modify_producto(conexion,cursor)
+                    print("Seleccionar producto")
+                    dwp.select_producto(cursor)
                 case 4:
-                    print("Eliminar producto")
-                    dwp.delete_producto(conexion,cursor)
-                case 5:
-                    print("Saliendo al menú principal")
+                    print("Marchando al menu principal")
                     break
-                    
 
     except ValueError as e:
-        print("No aplica ese valor, error{e}")
+        # ERROR SI EL TIPO DE DATO NO ES VALIDO
+        print(f"No aplica ese valor, error {e}")
     except Exception:
+        # ERROR PARA CUALQUIER OTRO TIPO DE FALLO
         print("Error al ejecutar la funcion")

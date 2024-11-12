@@ -1,162 +1,187 @@
-
+#DEF FUNNCION PARA LA COMPRA DE PRODUCTO
 def compra_producto (conexion,cursor):
     try:
         while True:
             try:
+                #PRIMERO ME ASEGURO DE QUE EXISTA EL CLIENTE QUE VA  A COMPRAR 
                 cliente=input("Se encuentra en la base de datos? Si/No")
-                if cliente.lower() == "Si":
+                if cliente.lower() == "si":
                     print("Inicio de sesión")
                     idcliente=int(input("Introduzca su id de cliente"))
-                    break
+
+                    #SELECCIONO HIPOTETICO CLIENTE CON LA ID QUE ME DAN
+                    consulta = "SELECT * FROM cliente WHERE idcliente = %s"
+                    cursor.execute(consulta, (idcliente,))
+                    resultado = cursor.fetchone()
+
+                    #SI SE PUEDE REALIZAR LA CONSULTA, LUEGO EXISTE CLIENTE
+                    if resultado:  
+                        print(f"Bienvenido!")  
+                        break
+                    #SINO,
+                    else:
+                        print("El ID de cliente no existe en la base de datos.")
+                #PERMITO REGISTRO SI NO ESTA REGISTRADO EN LA DB
                 else:
-                    cia=input("Ingrese su nombre: ")
-                    contacto=(input("Ingrese su contacto: "))
-                    direccion=(input("Ingrese su dirección: "))
+                    idcliente=int(input("Ingrese su idcliente"))
+                    Nombre=input("Ingrese su nombre: ")
                     ciudad=(input("Ingrese su ciudad: "))
-                    region=(input("Ingrese su región: "))
-                    pais=(input("Ingrese su país: "))
+                    tlf=input("Ingrese su telefono")
 
-                    consulta="insert into cliente(cia,contacto,direccion,ciudad,region,pais) values(%s,%s,%s,%s,%s,%s)"
+                    #EJECUTO CONSULTA CON LOS DATOS DADOS
+                    consulta="insert into cliente(idcliente,Nombre,ciudad,tlf) values(%s,%s,%s,%s)"
 
-                    cursor.execute(consulta,(cia,contacto,direccion,ciudad,region,pais))
+                    cursor.execute(consulta,(idcliente,Nombre,ciudad,tlf))
 
                     conexion.commit()
 
-                    #Faltaría crear el txt y que meta los datos en un array
+                    #GUARDO AL CLIENTE EN EL TXT COMO ARRAY UNA VEZ SE REGISTRE
 
-                    print(f"Se insertó el cliente: {cia}\n con el nombre de contacto : {contacto}\n\n con la direccion: {direccion}\n la ciudad: {ciudad}\n la region: {region}\n que vive en el pais {pais}\n")
+                    array = [idcliente, Nombre, ciudad, tlf]
+                    with open("Clientes.txt", "a") as archivo:
+                        archivo.write("=== Lista de Clientes ===\n")
+                        archivo.write("Datos insertados:\n\n")
+                        for dato in array:
+                            archivo.write(f"{dato}\n")
+                    print(f"Se insertó el cliente: {Nombre}\n con el id: {idcliente}\n la ciudad: {ciudad}\n y el telefono {tlf}")
+                    break
                         
 
 
 
-
+             #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
             except ValueError as e:
-                        print("Tipo de dato incorrecto, error {e}")
+                print(f"Tipo de dato incorrecto, error {e}")
             except Exception as unknown:
-                        print(f"No pudo ejecutarse la función, error {unknown}")
+                print(f"No pudo ejecutarse la función, error {unknown}")
 
         while True:
+            try: 
+                idcliente=int(input("Cual es su id de cliente?\n"))
+                Nombre=input("A nombre de quien seran las compras?\n")
 
-            lista= "select idproducto,nombre,precio from producto"
+                lista= "select idproducto,Nombre,precio from producto"
 
-            cursor.execute(lista)
+                cursor.execute(lista)
 
-            resultado=cursor.fetchall()
-            for idproducto, nombre,precio in resultado:
-                print(f"IDProducto: {idproducto}, Nombre: {nombre}, Precio: {precio}")
+                resultado=cursor.fetchall()
+                for idproducto, nombre,precio in resultado:
+                    print(f"IDProducto: {idproducto}, Nombre: {nombre}, Precio: {precio}")
 
-            #INSERT INTO EN PEDIDO ANTES DE COMPRA
-            consulta1=("insert into pedido(idcliente) values(%s)")
-            
-            cursor.execute(consulta1,(idcliente,))
+                #INSERT INTO EN PEDIDO ANTES DE COMPRA
+                consulta1=("insert into pedido(idcliente) values(%s)")
+                
+                cursor.execute(consulta1,(idcliente,))
 
-            conexion.commit()
-                        
-            #INTRODUCCIÓN DE DATOS NECESARIOS PARA ASIGNARLOS A LOS REGISTROS DE LA TABLA DETALLE
-            id_producto=input("Nuestros productos disponibles, introduce el id de aquel que quiera compra:\n")
-            unidades_compra=int(input("Cuántas unidades deseas comprar de ese producto"))
-            #
-            consulta2=("select precio from producto where id_producto= %s")
-            cursor.execute(consulta2,(precio,))
+                conexion.commit()
+                            
+                #INTRODUCCIÓN DE DATOS NECESARIOS PARA ASIGNARLOS A LOS REGISTROS DE LA TABLA DETALLE
+                unidades = int(input("Cuántas unidades deseas comprar del producto al que echo un ojo?"))
+                idproducto = int(input("De nuestros productos disponibles, introduce el id de aquel que quiera comprar:\n"))
 
-            resultado= cursor.fetchall()
+                # OBTENCIÓN DEL PRECIO DEL PRODUCTO SELECCIONADO
+                consulta2 = "select precio from producto where idproducto = %s"
+                cursor.execute(consulta2, (idproducto,))  
 
-            for precio in resultado:
+                resultado = cursor.fetchall()
 
-                precio_compra= precio
                 
 
-            
+                precio_compra = resultado[0][0]    
+                 
+                    
 
-            #INSERT INTO EN DETALLE PARA COMPRA
-            consulta3=("insert into detalle(id_producto,precio_compra,unidades_compra) values(%s,%s,%s)")
+                #INSERT INTO EN DETALLE PARA COMPRA
+                consulta3=("insert into detalle(idproducto,precio,unidades) values(%s,%s,%s)")
 
-            cursor.execute(consulta3,(id_producto,precio_compra,unidades_compra))
+                cursor.execute(consulta3,(idproducto,precio_compra,unidades))
 
-            conexion.commit()
+                conexion.commit()
 
-            print(f"Se realizó la compra de: {idproducto} con el coste: {precio_compra}, y la cantidad: {unidades_compra}")
+                print(f"Se realizó la compra de: {idproducto} con el coste: {precio_compra}, y la cantidad: {unidades}")
 
-            continuar=input("Deseas seguir comprando? Si/No\n")
+                array=[f"El cliente con el id:{idcliente}Y el nombre:{Nombre},Realizo la compra del producto con el id:{idproducto} ,A un precio de:{precio_compra} En la cantidad de :{unidades}"]
+                
+                #ARCHIVO TXT PARA INTRODUCIR LOS DATOS DE COMPRA
+                with open("Factura.txt", "a") as archivo:
+                    archivo.write("=== Factura de Compra ===\n")
 
-            if continuar.lower() =="si":
-                print("Siguiente compra")
-            else:
-                 break
-        #Te falta hacer un archivo txt donde introducir los datos de la compra
-        with open("Factura.txt", "w") as archivo:
-             
+                    archivo.write("Detalles de la compra:\n\n")
+                
+                    for dato in array:
+                        archivo.write(f"{dato}\n")
 
+                #PREGUNTO SI DESEA CONTINUAR CON LA COMPRA
+                continuar=input("Deseas seguir comprando? Si/No\n")
+
+                if continuar.lower() =="si":
+                    print("Siguiente compra")
+                elif continuar.lower() =="no":
+                    break
+                
+            #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
+            except ValueError as e:
+                print(f"Tipo de dato incorrecto, error {e}")
+            except Exception as unknown:
+                print(f"No pudo ejecutarse la función, error {unknown}")
         
-    
-            with open("numeros.txt","w") as archivo:
-            array=np.random.randint(1,100, size=10)
-            for numero in array:
-                archivo.write(f"{numero}\n")
-
-
-    except ValueError as e:
-        print(f"Tipo de dato incorrecto, error {e}")
+    #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
+    except Exception as e:
+        print(f"Error en la función 'compra_producto': {e}")
     except Exception as unknown:
-        print(f"No pudo ejecutarse la funcion, error {unknown}")
+        print(f"No pudo ejecutarse la función, error {unknown}")
 
-
-def select_producto (cursor):
+#DEF FUNCION PARA SELECCIONAR TODOS LOS PRODUCTOS
+def select_productos (cursor):
     try:
+        #EJECUTO SELECT ALL DE PRODUCTOS 
         consulta="select * from producto order by idproducto"
 
 
         cursor.execute(consulta)
 
+        #PRINTEA LOS RESULTADOS DE LA CONSULTA
         resultado=cursor.fetchall()
         for fila in resultado:
-            print(f"IDProducto: {fila[0]}, Nombre: {fila[1]}, IDCategoria: {fila[2]}, Medida: {fila[3]}, Precio: {fila[4]}, Stock: {fila[5]}")
+            print(f"IDProducto: {fila[0]}, Nombre: {fila[1]},  Precio: {fila[2]},")
 
        
-
+    #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
     except ValueError as e:
         print(f"Tipo de dato incorrecto, error {e}")
     except Exception as unkown:
         print(f"No pudo ejecutarse la funcion, error {unkown}")
 
-
-def modify_producto (conexion,cursor):
+#DEF FUNCION PARA SELECCIONAR UNO SOLO
+def select_producto (cursor):
     try:
-        nombre= input("Que nombre quiere asignarle al producto?: \n")
-        idcategoria=int(input("De que idcategoria forma parte?\n Categorias:\n 1.Bebidas\n 2.Condimentos\n 3.Reposteria\n 4.Lacteos\n 5. Granos/Cereales\n 6.Carnes Magras\n 7.Frutas/Verduras\n 8.Pescado/Marisco"))
-        medida=(input("Cuantos envases,y de que tipo disponemos, asi como de cuanta capacidad?\n"))
-        precio=(float(input("Cual es su precio\n")))
-        stock=int(input("Cuantos tenemos en stock de ese producto?\n"))
-        idproducto=int(input("Dime la ID del producto que quieres modificar: \n"))
+        #EJECUTO SELECT PARA ENSEÑAR TODOS LOS PRODUCTOS Y POSTERIORMENTE ELEGIR Y EJECUTO
+        lista= "select idproducto,nombre,from producto"
 
+        cursor.execute(lista)
 
-        consulta=(f"update producto set nombre = %s, idcategoria= %s, medida= %s, precio= %s, stock= %s where idproducto = %s")
+        #PRINTEO RESULTADOS 
+        resultado=cursor.fetchall()
+        for idproducto, nombre,precio in resultado:
+            print(f"IDProducto: {idproducto}, Nombre: {nombre}")
 
-        cursor.execute(consulta,(nombre,idcategoria, medida, precio, stock, idproducto))
+        #PREGUNTO EL ID DEL PRODUCTO DEL QUE QUIERE SABER EL PRECIO Y EJECUTO CON EL DATO 
+        idproducto=int(input("Que id tiene el producto del que deseas informacion?"))
 
-        conexion.commit()
-
-        print(f"El producto de id {idproducto} fue modificada al nombre {nombre} de ID de categoria : {idcategoria}, de medida: {medida}, que cuesta {precio}, y del cual tenemos {stock} unidades")
-
-    except ValueError as e:
-        print(f"Tipo de dato incorrecto, error {e}")
-    except Exception as unkown:
-        print(f"No pudo ejecutarse la funcion, error {unkown}")
-
-    
-def delete_producto(conexion,cursor):
-    try:
-        idproducto=int(input("Dime el id del producto que deseas eliminar"))
-        
-        consulta=(f"delete from producto where idproducto= %s")
+        consulta="select * from producto where idproducto=%s"
 
         cursor.execute(consulta,(idproducto,))
 
-        conexion.commit()
+        #PRINTEO LOS RESULTADOS ASOCIADOS A LA CONSULTA SQL PREVIA
+        resultado=cursor.fetchall()
+        for idproducto, nombre,precio in resultado:
+            print(f"IDProducto: {idproducto}, Nombre: {nombre}, Precio: {precio}")
 
-        print(f"El producto con el id {idproducto} ha sido eliminada")
+
+    #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
     except ValueError as e:
         print(f"Tipo de dato incorrecto, error {e}")
     except Exception as unkown:
         print(f"No pudo ejecutarse la funcion, error {unkown}")
-    
+
+
