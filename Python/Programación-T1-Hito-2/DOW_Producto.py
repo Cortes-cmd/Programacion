@@ -58,7 +58,7 @@ def compra_producto (conexion,cursor):
         while True:
             try: 
                 idcliente=int(input("Cual es su id de cliente?\n"))
-                Nombre=input("A nombre de quien seran las compras?\n")
+
 
                 lista= "select idproducto,Nombre,precio from producto"
 
@@ -68,10 +68,13 @@ def compra_producto (conexion,cursor):
                 for idproducto, nombre,precio in resultado:
                     print(f"IDProducto: {idproducto}, Nombre: {nombre}, Precio: {precio}")
 
+                fechapedido= input("En qué fecha realizó este pedido")
+                fechaentrega= input("Qué día la recibe")
+
                 #INSERT INTO EN PEDIDO ANTES DE COMPRA
-                consulta1=("insert into pedido(idcliente) values(%s)")
+                consulta1=("insert into pedido(idcliente,fechapedido,fechaentrega) values(%s,%s,%s)")
                 
-                cursor.execute(consulta1,(idcliente,))
+                cursor.execute(consulta1,(idcliente,fechapedido,fechaentrega))
 
                 conexion.commit()
                             
