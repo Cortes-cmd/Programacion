@@ -1,5 +1,5 @@
 # IMPORTO DOW PRODUCTO PARA USARLO EN LOS DISTINTOS CASES
-import DOW_Producto as dwp
+import DAW_Producto as dwp
 
 # DEFINO MENU
 def Menu(conexion, cursor):
