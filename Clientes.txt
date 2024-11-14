@@ -62,3 +62,16 @@ Datos insertados:
 Luca
 Palermo
 987969
+=== Lista de Clientes ===
+Datos insertados:
+
+(12,)
+Alejandro
+Madrid
+723
+Datos insertados:
+
+(13,)
+Paco
+PacoLandia
+888
