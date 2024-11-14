@@ -2,26 +2,34 @@
 def ingresar_cliente(conexion, cursor):
     try:
         # SOLICITO ATRIBUTOS DE LA TABLA CLIENTE
-        idcliente = int(input("Seleccione su id: "))
+
         Nombre = input("Ingrese su nombre: ")
         ciudad = input("Dime la ciudad del nuevo cliente: ")
         tlf = input("Ingrese su número de teléfono: ")
 
         # LOS INSERTO EN SENTENCIA SQL Y EJECUTO
-        consulta = "INSERT INTO cliente(idcliente, Nombre, ciudad, tlf) VALUES (%s, %s, %s, %s)"
-        cursor.execute(consulta, (idcliente, Nombre, ciudad, tlf))
+        consulta = "INSERT INTO cliente(Nombre, ciudad, tlf) VALUES ( %s, %s, %s)"
+        cursor.execute(consulta, ( Nombre, ciudad, tlf))
 
         conexion.commit()
 
+        #EXTRAIGO EL ID EN BASE A LOS DATOS INTRODUCIDOS PARA SACAR EL ID Y MOSTRÁRSELO POSTERIORMENTE
+        consulta="select idcliente from cliente where Nombre=%s and ciudad=%s and tlf=%s"
+        cursor.execute(consulta,(Nombre,ciudad,tlf))
+        resultado=cursor.fetchall()
+
+        for linea in resultado:
+                idcliente=linea
+                print(f"Posees id:{idcliente}")
+
         # GUARDO LA INSERCION EN UN ARRAY, Y ESTE LO PRINTEO EN UN ARCHIVO
-        array = [idcliente, Nombre, ciudad, tlf]
+        array = [ idcliente,Nombre, ciudad, tlf]
         with open("Clientes.txt", "a") as archivo:
-            archivo.write("=== Lista de Clientes ===\n")
             archivo.write("Datos insertados:\n\n")
             for dato in array:
                 archivo.write(f"{dato}\n")
 
-        print(f"Se insertó en la base de datos el cliente: {Nombre} de la ciudad: {ciudad} con el número {tlf}")
+        print(f"Se insertó en la base de datos el cliente: {Nombre}\n con el idcliente:{idcliente}\n de la ciudad: {ciudad}\n con el número de télefono:{tlf}")
 
         #LOS MISMOS ERRORES (DATA TYPE ERRONEO Y OTROS ERRORES VARIOS POSIBLES)
     except ValueError as e:

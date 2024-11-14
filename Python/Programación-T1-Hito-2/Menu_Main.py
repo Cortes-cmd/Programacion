@@ -7,7 +7,7 @@ def Menu (conexion,cursor):
     try:
         while True:
             #MUESTRO OPCIONES Y ASIGNO CADA UNA A CADA CASO POSIBLE
-            opcion=int(input("Menú de opciones\n1/Tabla Producto\n2/Tabla Cliente\n4/Salir\n"))
+            opcion=int(input("Menú de opciones\n1/Tabla Producto\n2/Tabla Cliente\n3/Salir\n"))
             match opcion:
                 case 1:
                     print("Marchando al menu de Producto")

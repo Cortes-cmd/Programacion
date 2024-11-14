@@ -7,7 +7,7 @@ def Menu(conexion, cursor):
        
         while True:
             # OPCIONES
-            opcion = int(input("Menú de opciones \n1/Comprar producto\n2/Seleccionar todos los productos\n3/Seleccionar un producto en particular\n5/Salir"))
+            opcion = int(input("Menú de opciones \n1/Comprar producto\n2/Seleccionar todos los productos\n3/Seleccionar un producto en particular\n4/Salir"))
             
             # SEGUN LA OPCION UNA FUNCION PARA LA NECESIDAD CORRESPONDIENTE
             match opcion:

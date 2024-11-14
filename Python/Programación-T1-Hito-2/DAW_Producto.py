@@ -23,27 +23,35 @@ def compra_producto (conexion,cursor):
                         print("El ID de cliente no existe en la base de datos.")
                 #PERMITO REGISTRO SI NO ESTA REGISTRADO EN LA DB
                 else:
-                    idcliente=int(input("Ingrese su idcliente"))
                     Nombre=input("Ingrese su nombre: ")
                     ciudad=(input("Ingrese su ciudad: "))
                     tlf=input("Ingrese su telefono")
 
                     #EJECUTO CONSULTA CON LOS DATOS DADOS
-                    consulta="insert into cliente(idcliente,Nombre,ciudad,tlf) values(%s,%s,%s,%s)"
+                    consulta="insert into cliente(Nombre,ciudad,tlf) values(%s,%s,%s)"
 
-                    cursor.execute(consulta,(idcliente,Nombre,ciudad,tlf))
+                    cursor.execute(consulta,(Nombre,ciudad,tlf))
 
                     conexion.commit()
 
                     #GUARDO AL CLIENTE EN EL TXT COMO ARRAY UNA VEZ SE REGISTRE
+                    consulta="select idcliente from cliente where Nombre=%s and ciudad=%s and tlf=%s"
+                    cursor.execute(consulta,(Nombre,ciudad,tlf))
+                    resultado=cursor.fetchall()
 
+                    #INFORMO AL CLIENTE DE SU ID PARA PODER HACER COMPRA A POSTERIORI
+                    for linea in resultado:
+                        idcliente=linea
+                        print(f"Se te ha asignado el id:{idcliente}")
+
+                    #INTRODUCZCO LOS DATOS EN UN ARRAY Y POSTERIORMENTE UN ARCHIVO
                     array = [idcliente, Nombre, ciudad, tlf]
                     with open("Clientes.txt", "a") as archivo:
                         archivo.write("=== Lista de Clientes ===\n")
                         archivo.write("Datos insertados:\n\n")
                         for dato in array:
                             archivo.write(f"{dato}\n")
-                    print(f"Se insertó el cliente: {Nombre}\n con el id: {idcliente}\n la ciudad: {ciudad}\n y el telefono {tlf}")
+                    print(f"Se insertó el cliente: {Nombre}\n con el idcliente: {idcliente}\n la ciudad: {ciudad}\n y el telefono {tlf}")
                     break
                         
 
@@ -57,24 +65,25 @@ def compra_producto (conexion,cursor):
 
         while True:
             try: 
-                idcliente=int(input("Cual es su id de cliente?\n"))
+                #PIDO DATOS PARA COMPRA
+                print("Inicializando compra...")
+                idcliente=int(input("Cual es su id de cliente?\n>"))
+                Nombre=input("A nombre de quién es la compra?\n>")
 
-
+                #MUESTRO LISTA DE PRODUCTOS
                 lista= "select idproducto,Nombre,precio from producto"
 
                 cursor.execute(lista)
 
+                #PRINTEO PRODUCTOS POR MEDIO DE LISTADO
                 resultado=cursor.fetchall()
                 for idproducto, nombre,precio in resultado:
                     print(f"IDProducto: {idproducto}, Nombre: {nombre}, Precio: {precio}")
 
-                fechapedido= input("En qué fecha realizó este pedido")
-                fechaentrega= input("Qué día la recibe")
-
                 #INSERT INTO EN PEDIDO ANTES DE COMPRA
-                consulta1=("insert into pedido(idcliente,fechapedido,fechaentrega) values(%s,%s,%s)")
+                consulta1=("insert into pedido(idcliente) values(%s)")
                 
-                cursor.execute(consulta1,(idcliente,fechapedido,fechaentrega))
+                cursor.execute(consulta1,(idcliente,))
 
                 conexion.commit()
                             
@@ -101,7 +110,7 @@ def compra_producto (conexion,cursor):
 
                 conexion.commit()
 
-                print(f"Se realizó la compra de: {idproducto} con el coste: {precio_compra}, y la cantidad: {unidades}")
+                print(f"Se realizó la compra del producto con el id: {idproducto} con el coste: {precio_compra}, y la cantidad: {unidades}")
 
                 array=[f"El cliente con el id:{idcliente}Y el nombre:{Nombre},Realizo la compra del producto con el id:{idproducto} ,A un precio de:{precio_compra} En la cantidad de :{unidades}"]
                 
@@ -159,7 +168,7 @@ def select_productos (cursor):
 def select_producto (cursor):
     try:
         #EJECUTO SELECT PARA ENSEÑAR TODOS LOS PRODUCTOS Y POSTERIORMENTE ELEGIR Y EJECUTO
-        lista= "select idproducto,nombre,from producto"
+        lista= "select idproducto,nombre,precio from producto"
 
         cursor.execute(lista)
 
