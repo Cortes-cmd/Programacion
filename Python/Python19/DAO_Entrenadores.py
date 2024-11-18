@@ -1,4 +1,4 @@
-#DEF INSERTAR PRODUCTO
+#DEF INSERTAR ENTRENADOR
 def insert_entrenador (conexion,cursor):
     try:
         #PIDO DATOS
@@ -28,7 +28,7 @@ def insert_entrenador (conexion,cursor):
     except Exception as unkown:
         print(f"No pudo ejecutarse la funcion, error {unkown}")
 
-#DEF SELECCIONAR PRODUCTO
+#DEF SELECCIONAR ENTRENADORES
 def select_entrenadores (cursor):
     try:
         #CONSULTA VIA SQL Y EJECUTO
@@ -50,7 +50,7 @@ def select_entrenadores (cursor):
     except Exception as unkown:
         print(f"No pudo ejecutarse la funcion, error {unkown}")
 
-#DEF MODIFICAR PRODUCTO
+#DEF MODIFICAR FICHA DE ENTRENADOR/A
 def modify_entrenador (conexion,cursor):
     try:
         #PIDO DATOS
@@ -72,7 +72,7 @@ def modify_entrenador (conexion,cursor):
     except Exception as unkown:
         print(f"No pudo ejecutarse la funcion, error {unkown}")
 
-#DEF ELIMINAR PRODUCTO
+#DEF ELIMINAR FICHA DE ENTRENADOR
 def delete_entrenador (conexion,cursor):
     try:
         #PIDO DATOS

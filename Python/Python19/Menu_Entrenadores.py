@@ -1,8 +1,11 @@
+#LE DOY ACCESO DE FUNCIONES CON ENTRENADORES PARA ACCEDER A ELLAS VIA MENU ENTRENADORES
 import DAO_Entrenadores as de
 
 def Menu (conexion,cursor):
     try:
         while True:
+            #PLANTEO OPCION DE LA QUE MOSTRAR LAS OPCIONES
+
             opcion=int(input("Menú de opciones \n1/Insertar nuevo Entrenador/a\n2/Seleccionar todos los Entrenadores\n3/Modificar ficha de Entrenador/a\n4/Eliminar Entrenador/a\n5/Salir"))
             match opcion:
                 case 1: 

@@ -1,11 +1,15 @@
+#IMPORTO PRETTYTABLE PARA MOSTRAR UNA FORMA ESTÉTICA DE TABLA CON COMPONENTES ASCII
 from prettytable import PrettyTable
+
 table=PrettyTable()
+
 #DEF COMPRAR
 def hacer_inscripcion (conexion,cursor):
   
     try:
         while True:
-            #PIDO DATOS
+
+            #PRINTEO LISTA DE CLIENTES PARA QUE SE PUEDA ELEGIR A CUÁLES DESEAS INCLUIR EN LAS INSCRIPCIONES PIDO DATOS, Y EJECUTO
 
             print("Lista de clientes")
 
@@ -18,6 +22,8 @@ def hacer_inscripcion (conexion,cursor):
              print(f"IDCliente: {fila[0]}\n Nombre: {fila[1]}\n edad :{fila[2]}\n tipo de membresía: {fila[3]}")
 
             id_cliente=int(input("Cuál es su id del cliente inscrito?\n"))
+
+            #PRINTEO LISTA ACTIVIDADES PARA ELEGIR A QUÉ ACTIVIDAD DESEA LA PERSONA INSCRIBIRSE EJECUTO VIA SQL LA LISTA, PIDO DATOS, Y EJECUTO
 
             print("Lista de actividades")
 
@@ -51,7 +57,7 @@ def hacer_inscripcion (conexion,cursor):
             for id_cliente, id_actividad in resultado:
                 print(f"Idcliente inscrito: {id_cliente}, id de la actividad a la que se inscribe {id_actividad}")
 
-            #PREGUNTO SI DESEA CONTINUAR CON LA COMPRA
+            #PREGUNTO SI DESEA CONTINUAR CON LA INSERCIONE
             continuar=input("Deseas seguir insertando? Si/No\n")
 
             if continuar.lower() =="si":
@@ -65,10 +71,10 @@ def hacer_inscripcion (conexion,cursor):
     except Exception as unknown:
         print(f"No pudo ejecutarse la función, error {unknown}")
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-#DEF SELECCIONAR PEDIDOS     TIENES QUE CAMBIARLO
+#DEF SELECCIONAR INSCRIPCIONES   
 def select_inscripciones (cursor):
     try:
-        #SELECCIONO TODOS LOS PEDIDOS CON EL LIMITE DE 10 Y EJECUTO
+        #SELECCIONO TODAS LAS INSCRIPCIONES Y EJECUTO
         consulta="select * from inscripciones inner join actividades on actividades.id_actividad = inscripciones.id_actividad inner join entrenadores on entrenadores.id_entrenador = actividades.id_entrenador inner join clientes on clientes.id_cliente = inscripciones.id_cliente  order by inscripciones.id_inscripcion desc"
 
 
@@ -76,7 +82,7 @@ def select_inscripciones (cursor):
 
         cursor.execute(consulta)
 
-        #MUESTRO POR FILAS LOS DATOS DE LAS COLUMNAS EN SQL
+        #MUESTRO POR FILAS LOS DATOS DE LAS COLUMNAS EN SQL, APLICANDO UNA FUNCIONALIDAD DE LA LIBRERIA  PRETTYTABLE
         resultado=cursor.fetchall()
         for fila in resultado:
             table.field_names=["ID Inscripción","Cliente","Actividad","Horario"]
@@ -91,10 +97,10 @@ def select_inscripciones (cursor):
     except Exception as unkown:
         print(f"No pudo ejecutarse la funcion, error {unkown}")
 
-#DEF ELIMINAR PEDIDO
+#DEF ELIMINAR INSCRIPCIÓN
 def delete_inscripcion(conexion,cursor):
     try:
-
+        #SELECCIONO TODAS LAS INSCRIPCIONES Y EJECUTO
         consulta="select * from inscripciones inner join actividades on actividades.id_actividad = inscripciones.id_actividad inner join entrenadores on entrenadores.id_entrenador = actividades.id_entrenador inner join clientes on clientes.id_cliente = inscripciones.id_cliente  order by inscripciones.id_inscripcion desc"
 
 
@@ -102,7 +108,7 @@ def delete_inscripcion(conexion,cursor):
 
         cursor.execute(consulta)
 
-        #MUESTRO POR FILAS LOS DATOS DE LAS COLUMNAS EN SQL
+        #MUESTRO POR FILAS LOS DATOS DE LAS COLUMNAS EN SQL, APLICANDO UNA FUNCIONALIDAD DE LA LIBRERIA  PRETTYTABLE
         resultado=cursor.fetchall()
         for fila in resultado:
             table.field_names=["ID Inscripción","Cliente","Actividad","Horario"]

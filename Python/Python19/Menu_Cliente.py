@@ -1,3 +1,4 @@
+#LE DOY ACCESO DE FUNCIONES CON CLIENTES PARA ACCEDER A ELLAS VIA MENU CLIENTES
 import DAO_Cliente as dc
 
 def Menu (conexion,cursor):
