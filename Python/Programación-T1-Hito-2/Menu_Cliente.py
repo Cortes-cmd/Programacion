@@ -1,5 +1,5 @@
 # IMPORTO CLIENTE PARA USARLO EN EL MENU
-import DAW_Cliente as dwC
+import DAO_Cliente as dwC
 
 # DEF MENU
 def Menu(conexion, cursor):
