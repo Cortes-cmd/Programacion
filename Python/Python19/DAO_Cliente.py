@@ -1,3 +1,5 @@
+import numpy as np
+from pathlib import Path as path
 #DEF INSERTAR CLIENTE
 def insert_cliente (conexion,cursor):
     try:
@@ -11,6 +13,31 @@ def insert_cliente (conexion,cursor):
         cursor.execute(consulta,(nombre, edad, tipo_membresia))
 
         conexion.commit()
+
+
+
+        archivo = path("Cliente.txt")
+        
+        if archivo.exists():
+            archivo.unlink()
+            with open(archivo,"r+") as archivo:
+                archivo.readlines()
+                for linea in archivo:
+                    array = np.array(linea).strip()
+                    nombre = array[0]
+                    edad = array[1]
+                    membresia = array[2]
+                    edad = int(edad)
+                    print(array)
+                    consulta = "insert into cliente (...) values (%s,%s,%s)"
+                    cursor.execute(consulta,(nombre,edad,membresia))
+        else:
+            
+            with open("Clientes.txt", "w") as archivo:
+                for fila in archivo:
+                    archivo.write(",".join(map(fila))+ "\n")
+                archivo.close()
+  
         #SACO EL IDCLIENTE VIA SQL PORQUE ES AUTOINCREMENT, DE ESTA FORMA EN EL PRINT FINAL, PUEDO APORTAR EL IDCLIENTE COMO DATO
         consulta="select id_cliente from clientes where nombre=%s and edad=%s and tipo_membresia=%s"
         cursor.execute(consulta,(nombre,edad,tipo_membresia))
