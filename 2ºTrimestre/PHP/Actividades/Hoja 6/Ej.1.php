@@ -9,19 +9,19 @@ class Libro{
 
  public function mostrarinfo(){
 
-    return "Informacion del libro" . $this->titulo . $this->autor . $this->numero_paginas;
+    return" Informacion del libro " . $this->titulo . $this->autor . $this->numero_paginas;
 
  }
 
 }
 
-$POUNLIBROMAH= new $Libro();
-$POUNLIBROMAH -> $titulo = "Demasiado añejo para estar sobrio de algo";
-$POUNLIBROMAH -> $autor = "PapaJohns";
-$POUNLIBROMAH -> $numero_paginas= "1024";
+$POUNLIBROMAH= new Libro();
+$POUNLIBROMAH -> titulo = " Demasiado añejo para estar sobrio de algo ";
+$POUNLIBROMAH -> autor = " PapaJohns";
+$POUNLIBROMAH -> numero_paginas= " 1024 ";
 
 
-$POUNLIBROMAH -> mostrarinfo();
+echo $POUNLIBROMAH -> mostrarinfo();
 
 
 
