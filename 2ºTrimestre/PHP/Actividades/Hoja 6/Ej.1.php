@@ -16,9 +16,13 @@ class Libro{
 }
 
 $POUNLIBROMAH= new $Libro();
-$POUNLIBROMAH= $titulo = "Demasiado añejo para estar sobrio de algo";
-$POUNLIBROMAH= $autor = "PapaJohns";
-$POUNLIBROMAH= $numero
+$POUNLIBROMAH -> $titulo = "Demasiado añejo para estar sobrio de algo";
+$POUNLIBROMAH -> $autor = "PapaJohns";
+$POUNLIBROMAH -> $numero_paginas= "1024";
+
+
+$POUNLIBROMAH -> mostrarinfo();
+
 
 
 
