@@ -62,6 +62,21 @@ $Personaje1 -> nivel = 1;
 $Personaje1 -> puntosVida = 15;
 $Personaje1 -> puntosAtaque = 20;
 
+$Personaje2 = New personaje;
+
+$Personaje2 -> nombre ="Manoli";
+$Personaje2-> nivel = 1;
+$Personaje2-> puntosVida=20;
+$Personaje -> puntosAtaque = 15;
+
+$Personaje1 -> atacar($Personaje2);
+$Personaje2 -> atacar($Personaje1);
+
+$Personaje1 -> curarse();
+$Personaje2 -> curarse();
+
+$Personaje1 -> subirNivel();
+$Personaje2 -> subirNivel();
 
 
 
