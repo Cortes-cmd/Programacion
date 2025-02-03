@@ -1,5 +1,7 @@
 <?php
+
 error_reporting(E_ALL);
+
 function convertirTemperatura($temp,$conversor){
     try{
         if ($conversor != "C" && $conversor != "F" ) {
