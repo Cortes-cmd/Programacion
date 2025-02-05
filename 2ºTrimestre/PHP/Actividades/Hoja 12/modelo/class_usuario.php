@@ -9,7 +9,8 @@ class Usuario {
     }
 
     public function AgregarUsuario($usuario,$password,$rol) {
-        $query = "INSERT INTO usuario (usuario,password,rol) VALUES (?, ?, ?)";
+
+        $query = "INSERT INTO usuario (usuario,passwd,rol) VALUES (?, ?, ?)";
         $stmt = $this->conexion->conexion->prepare($query);
         $stmt->bind_param("sss", $usuario,$password,$rol);
 
@@ -68,5 +69,37 @@ class Usuario {
 
         $stmt->close();
     }
-}
+    public function VerificarUsuario($usuario, $password) {
+        // Depuración: Mostrar los valores de las variables
+        // echo "Usuario: $usuario, Password: $password<br>";
+    
+        $query = "SELECT * FROM usuario WHERE usuario = ? AND passwd = ? ";
+        $stmt = $this->conexion->conexion->prepare($query);
+        $stmt->bind_param("ss", $usuario, $password);
+    
+        if ($stmt->execute()) {
+            echo "Usuario verificado con éxito.<br>";
+        } else {
+            echo "Error al verificar usuario: " . $stmt->error . "<br>";
+        }
+    
+        $resultado = $stmt->get_result();
+    
+        if ($resultado->num_rows > 0) {
+            $fila = $resultado->fetch_assoc();
+            $_SESSION['usuario'] = $fila['usuario'];
+            $_SESSION['passwd'] = $fila['passwd'];
+            header("Location: ../index.php");
+            echo "Bienvenido, " . $_SESSION['usuario'] . "<br>";
+            exit();
+        } else {
+            echo "Credenciales incorrectas.<br>";
+        }
+    
+        $stmt->close();
+    }
+}   
+
+
+
 ?>

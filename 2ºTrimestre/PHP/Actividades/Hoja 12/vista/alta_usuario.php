@@ -5,9 +5,10 @@ error_reporting(E_ERROR);
 
 require_once '../controlador/UsuariosController.php';
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['usuario'];
-    $password = $_POST['password'];
+    $password = $_POST['passwd'];
     $rol = $_POST['rol'];
 
     $controller = new UsuariosController();
@@ -48,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="alta_usuario.php" method="post">
             <div class="form-group">
                 <label for="nombre">Usuario</label>
-                <input type="text" name="Usuario" id="Usuario" class="form-control" required>
+                <input type="text" name="usuario" id="usuario" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="Password">Password</label>
@@ -61,7 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="user">User</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn1-purple">Guardar</button>
+            <div class="d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn btn1-purple">Guardar</button>
+            </div>
+            
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

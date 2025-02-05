@@ -27,5 +27,9 @@ class UsuariosController {
     public function EliminarUsuario($id_usuario) {
         $this->modelo->EliminarUsuario($id_usuario);
     }
+
+    public function VerificarUsuario($usuario, $password) {
+        $this->modelo->VerificarUsuario($usuario, $password);
+    }
 }
 ?>

@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 error_reporting(E_ERROR);
 
 require_once '../controlador/UsuariosController.php';
@@ -80,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <link rel="stylesheet" href="Estilo.css">
             <div class="d-flex justify-content-center align-items-center">
-                <button type="submit" class="btn btn-purple">Actualizar</button>
+                <button type="submit" class="btn btn1-purple">Actualizar</button>
             </div>
 
         </form>

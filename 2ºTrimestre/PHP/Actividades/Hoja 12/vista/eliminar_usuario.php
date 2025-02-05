@@ -1,6 +1,7 @@
 <?php
 // eliminar_socio.php
 session_start();
+session_regenerate_id(true);
 error_reporting(E_ERROR);
 
 require_once '../controlador/UsuariosController.php';

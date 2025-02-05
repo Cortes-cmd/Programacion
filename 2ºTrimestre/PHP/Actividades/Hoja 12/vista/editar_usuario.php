@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 error_reporting(E_ERROR);
 
 require_once '../controlador/UsuariosController.php';
@@ -35,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <title>Editar Socio</title>
+    <title>Editar Usuario</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -50,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 <div class="container mt-5">
-        <h1 class="text-center mb-4">Editar Socio</h1>
+        <h1 class="text-center mb-4">Editar Usuario</h1>
         <form action="editar_usuario.php" method="post">
             <div class="form-group">
                 <label for="id_usuario">ID</label>

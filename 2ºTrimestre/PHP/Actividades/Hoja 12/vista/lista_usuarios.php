@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 error_reporting(E_ERROR);
 
 require_once '../controlador/UsuariosController.php';
@@ -26,7 +27,7 @@ $usuarios = $controller->ListarUsuarios();
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Gestión de Usuarios</a>
+        <a class="navbar-brand" href="../index.php">Gestión de Usuarios</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,11 +36,13 @@ $usuarios = $controller->ListarUsuarios();
                 <li class="nav-item">
                     <a class="nav-link" href="lista_socios.php">Lista de Socios</a>
                 </li>
+                <?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin'): ?>
                 <li class="nav-item">
                     <a class="nav-link" href="lista_usuarios.php">Lista de Usuarios</a>
                 </li>
+                <?php endif; ?>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-danger text-white ml-3" href="logout.php">Cerrar Sesión</a>
+                    <a class="nav-link btn btn2-danger text-white ml-3" href="logout.php">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>
@@ -62,7 +65,7 @@ $usuarios = $controller->ListarUsuarios();
                     <tr>
                         <td><?= $usuario['id_usuario'] ?></td>
                         <td><?= $usuario['usuario'] ?></td>
-                        <td><?= $usuario['passw'] ?></td>
+                        <td><?= $usuario['passwd'] ?></td>
                         <td><?= $usuario['rol'] ?></td>
                         <td>
                             <a href="editar_usuario.php?id=<?= $usuario['id_usuario'] ?>" class="btn btn-primary btn-sm">Editar</a>

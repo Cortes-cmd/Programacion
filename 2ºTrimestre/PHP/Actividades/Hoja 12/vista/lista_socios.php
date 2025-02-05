@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_regenerate_id(true);
 error_reporting(E_ERROR);
 
 require_once '../controlador/SociosController.php';
@@ -26,7 +27,7 @@ $socios = $controller->listarSocios();
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Gestión de Usuarios</a>
+        <a class="navbar-brand" href="../index.php">Gestión de Usuarios</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -39,7 +40,7 @@ $socios = $controller->listarSocios();
                     <a class="nav-link" href="lista_usuarios.php">Lista de Usuarios</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-danger text-white ml-3" href="logout.php">Cerrar Sesión</a>
+                    <a class="nav-link btn btn2-danger text-white ml-3" href="logout.php">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>

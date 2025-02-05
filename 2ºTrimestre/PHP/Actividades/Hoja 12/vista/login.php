@@ -1,25 +1,29 @@
 <?php
-error_reporting(E_ERROR);
 session_start();
+session_regenerate_id(true);
+error_reporting(E_ERROR);
 
-if ($_SERVER['REQUEST_METHOD']== "POST"){
-    if (isset($_POST['usuario']) && isset($_POST['password'])) {
-        if($_POST['usuario']== "admin" && $_POST["password"]=="1234"){
-            $_SESSION['usuario'] = 'admin';
-            header("Location: lista_socios.php"); // Esto no se ejecuta bien y en vez de a lista, trata de llevarme a /vista/index
+require_once '../controlador/UsuariosController.php';
 
-            exit();
-        }else {
 
-            header ("Location: login.php"); // Si me equivoco mantengo login
-            exit(); 
-        }
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usuario = $_POST['usuario'];
+    $password = $_POST['passwd'];
+    $rol = $_POST['rol'];
+
+    // Conectar a la base de datos
+    $controller = new UsuariosController();
+    $controller->VerificarUsuario($usuario, $password);
+
 }
 ?>
 
-<form method="post">
-    Usuario: <input type="text" name="usuario"><br>
-    Contraseña: <input type="password" name="password"><br>
+<form action="login.php" method="POST">
+    <label for="usuario">Usuario:</label>
+    <input type="text" id="usuario" name="usuario" required><br>
+
+    <label for="passwd">Contraseña:</label>
+    <input type="password" id="passwd" name="passwd" required><br>
+
     <input type="submit" value="Iniciar Sesión">
 </form>
