@@ -1,0 +1,20 @@
+.btn1-purple {
+    background-color: #6f42c1 ;
+    border-color: #6f42c1 ;
+    color: white ;
+    padding: 1% 2% ;
+    margin-top: 5% ;
+    font-size: 16px ;
+    align-items: center;
+}
+
+.btn2-danger {
+
+    background-color: #dc3545 ;
+    border-color: #dc3545 ;
+    color: white ;
+    padding: 2% 5% ;
+    margin-top: 5% ;
+    font-size: 16px ;
+    align-items:end;
+}
