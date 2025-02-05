@@ -6,16 +6,14 @@ require_once '../controlador/UsuariosController.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id_cliente = $_POST['id_socio'];
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $email = $_POST['email'];
-    $telefono = $_POST['telefono'];
-    $fecha_nacimiento = $_POST['fecha_nacimiento'];
+    $id_cliente = $_POST['id_usuario'];
+    $usuario = $_POST['Usuario'];
+    $password = $_POST['password'];
+    $rol = $_POST['rol'];
 
 
-    $controller = new SociosController;
-    $controller->ActualizarSocio($id_cliente, $nombre, $apellido, $email, $telefono, $fecha_nacimiento);
+    $controller = new UsuariosController;
+    $controller->ActualizarUsuario($id_cliente,$usuario,$password,$rol);
 
     if($_SESSION['usuario']== 'admin'|| $_SESSION['usuario']=='user'){
 
@@ -53,35 +51,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <div class="container mt-5">
         <h1 class="text-center mb-4">Editar Socio</h1>
-        <form action="editar_socio.php" method="post">
+        <form action="editar_usuario.php" method="post">
             <div class="form-group">
-                <label for="id_cliente">ID</label>
-                <input type="text" name="id_cliente" id="id_cliente" class="form-control" required>
+                <label for="id_usuario">ID</label>
+                <input type="text" name="id_usuario" id="id_usuario" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" class="form-control" required>
+                <label for="Usuario">Usuario</label>
+                <input type="text" name="Usuario" id="Usuario" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" id="apellido" class="form-control" required>
+                <label for="apellido">Password</label>
+                <input type="text" name="password" id="password" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control" required>
+                <label for="Rol">Rol</label>
+                <input type="text" name="rol" id="rol" class="form-control" required>
             </div>
-            <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="text" name="telefono" id="telefono" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="fecha_nacimiento">Fecha de Nacimiento</label>
-                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required>
-            </div>
-            <link rel="stylesheet" href="Estilo.css">
             <div class="d-flex justify-content-center align-items-center">
-                <button type="submit" class="btn btn-purple">Actualizar</button>
+                <button type="submit" class="btn btn1-purple">Actualizar</button>
             </div>
+
+            <link rel="stylesheet" href="Estilo.css">
 
         </form>
     </div>

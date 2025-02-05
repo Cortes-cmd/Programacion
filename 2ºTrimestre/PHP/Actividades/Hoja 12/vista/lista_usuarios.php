@@ -2,9 +2,9 @@
 session_start();
 error_reporting(E_ERROR);
 
-require_once '../controlador/SociosController.php';
-$controller = new SociosController();
-$socios = $controller->listarSocios();
+require_once '../controlador/UsuariosController.php';
+$controller = new UsuariosController();
+$usuarios = $controller->ListarUsuarios();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -46,38 +46,34 @@ $socios = $controller->listarSocios();
     </nav>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Socios Registrados</h1>
+        <h1 class="text-center mb-4">Usuarios Registrados</h1>
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Email</th>
-                    <th>Teléfono</th>
-                    <th>Fecha de Nacimiento</th>
+                    <th>Usuario</th>
+                    <th>Password</th>
+                    <th>Rol</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($socios as $socio): ?>
+                <?php foreach ($usuarios as $usuario): ?>
                     <tr>
-                        <td><?= $socio['id_socio'] ?></td>
-                        <td><?= $socio['nombre'] ?></td>
-                        <td><?= $socio['apellido'] ?></td>
-                        <td><?= $socio['email'] ?></td>
-                        <td><?= $socio['telefono'] ?></td>
-                        <td><?= $socio['fecha_nacimiento'] ?></td>
+                        <td><?= $usuario['id_usuario'] ?></td>
+                        <td><?= $usuario['usuario'] ?></td>
+                        <td><?= $usuario['passw'] ?></td>
+                        <td><?= $usuario['rol'] ?></td>
                         <td>
-                            <a href="editar_socio.php?id=<?= $socio['id_socio'] ?>" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="eliminar_socio.php?id=<?= $socio['id_socio'] ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                            <a href="editar_usuario.php?id=<?= $usuario['id_usuario'] ?>" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="eliminar_usuario.php?id=<?= $usuario['id_usuario'] ?>" class="btn btn-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
         <div class="text-center mt-3">
-            <a href="alta_socio.php" class="btn btn-success">Agregar un nuevo socio</a>
+            <a href="alta_usuario.php" class="btn btn-success">Agregar un nuevo usuario</a>
         </div>
     </div>
     <!-- Integración de JavaScript de Bootstrap (opcional para funciones avanzadas) -->

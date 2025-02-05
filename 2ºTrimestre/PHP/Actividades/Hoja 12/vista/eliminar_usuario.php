@@ -3,22 +3,23 @@
 session_start();
 error_reporting(E_ERROR);
 
-require_once '../controlador/SociosController.php';
+require_once '../controlador/UsuariosController.php';
 
 
 if (isset($_GET['id'])) {
     $id_cliente = $_GET['id'];
-    $controller = new SociosController();
-    $controller->Eliminarsocio($id_cliente);
+    $controller = new UsuariosController();
+    $controller->EliminarUsuario($id_cliente);
     header("Location: ../index.php");
     exit();
 }
 ?>
 
 
+LISTA SOCIO
 
 <?php
-require_once '../controlador/SociosController.php';
+require_once '../controlador/UsuariosController.php';
 $controller = new SociosController();
 $socios = $controller->listarSocios();
 ?>

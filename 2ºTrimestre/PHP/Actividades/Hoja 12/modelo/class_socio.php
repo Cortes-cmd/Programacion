@@ -8,10 +8,10 @@ class Socio {
         $this->conexion = new Conexion();
     }
 
-    public function agregarSocio($nombre, $apellido, $email, $telefono, $fecha_nacimiento) {
+    public function AgregarSocio($nombre, $apellido, $email, $telefono, $fecha_nacimiento) {
         $query = "INSERT INTO socios (nombre, apellido, email, telefono, fecha_nacimiento) VALUES (?, ?, ?, ?, ?)";
         $stmt = $this->conexion->conexion->prepare($query);
-        $stmt->bind_param("sssss", $nombre, $apellido, $email, $telefono, $fecha_nacimiento);
+        $stmt->bind_param("sssis", $nombre, $apellido, $email, $telefono, $fecha_nacimiento);
 
         if ($stmt->execute()) {
             echo "Socio agregado con éxito.";
@@ -22,7 +22,7 @@ class Socio {
         $stmt->close();
     }
 
-    public function obtenerSocios() {
+    public function ObtenerSocios() {
         $query = "SELECT * FROM socios";
         $resultado = $this->conexion->conexion->query($query);
         $socios = [];
@@ -32,7 +32,7 @@ class Socio {
         return $socios;
     }
 
-    public function obtenerSocioPorId($id_socio) {
+    public function ObtenerSocioPorId($id_socio) {
         $query = "SELECT * FROM socios WHERE id_socio = ?";
         $stmt = $this->conexion->conexion->prepare($query);
         $stmt->bind_param("i", $id_socio);
@@ -41,7 +41,7 @@ class Socio {
         return $resultado->fetch_assoc();
     }
 
-    public function actualizarSocio($id_socio, $nombre, $apellido, $email, $telefono, $fecha_nacimiento) {
+    public function ActualizarSocio($id_socio, $nombre, $apellido, $email, $telefono, $fecha_nacimiento) {
         $query = "UPDATE socios SET nombre = ?, apellido = ?, email = ?, telefono = ?, fecha_nacimiento = ? WHERE id_socio = ?";
         $stmt = $this->conexion->conexion->prepare($query);
         $stmt->bind_param("sssssi", $nombre, $apellido, $email, $telefono, $fecha_nacimiento, $id_socio);
@@ -55,7 +55,7 @@ class Socio {
         $stmt->close();
     }
 
-    public function eliminarSocio($id_socio) {
+    public function EliminarSocio($id_socio) {
         $query = "DELETE FROM socios WHERE id_socio = ?";
         $stmt = $this->conexion->conexion->prepare($query);
         $stmt->bind_param("i", $id_socio);

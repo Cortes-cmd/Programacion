@@ -8,24 +8,24 @@ class SociosController {
         $this->modelo = new Socio();
     }
 
-    public function agregarSocio($nombre, $apellido, $email, $telefono, $fecha_nacimiento) {
-        $this->modelo->agregarSocio($nombre, $apellido, $email, $telefono, $fecha_nacimiento);
+    public function AgregarSocio($nombre, $apellido, $email, $telefono, $fecha_nacimiento ) {
+        $this->modelo->AgregarSocio($nombre, $apellido, $email, $telefono, $fecha_nacimiento);
     }
 
-    public function listarSocios() {
-        return $this->modelo->obtenerSocios();
+    public function ListarSocios() {
+        return $this->modelo->ObtenerSocios();
     }
 
-    public function obtenerSocioPorId($id_socio) {
-        return $this->modelo->obtenerSocioPorId($id_socio);
+    public function ObtenerSocioPorId($id_socio) {
+        return $this->modelo->ObtenerSocioPorId($id_socio);
     }
 
-    public function actualizarSocio($id_socio, $nombre, $apellido, $email, $telefono, $fecha_nacimiento) {
-        $this->modelo->actualizarSocio($id_socio, $nombre, $apellido, $email, $telefono, $fecha_nacimiento);
+    public function ActualizarSocio($id_socio, $nombre, $apellido, $email, $telefono, $fecha_nacimiento) {
+        $this->modelo->ActualizarSocio($id_socio, $nombre, $apellido, $email, $telefono, $fecha_nacimiento);
     }
 
-    public function eliminarSocio($id_socio) {
-        $this->modelo->eliminarSocio($id_socio);
+    public function EliminarSocio($id_socio) {
+        $this->modelo->EliminarSocio($id_socio);
     }
 }
 ?>
