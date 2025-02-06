@@ -36,13 +36,13 @@ $usuarios = $controller->ListarUsuarios();
                 <li class="nav-item">
                     <a class="nav-link" href="lista_socios.php">Lista de Socios</a>
                 </li>
-                <?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin'): ?>
+                <?php if ($_SESSION['rol'] == 'admin'){ ?>
                 <li class="nav-item">
                     <a class="nav-link" href="lista_usuarios.php">Lista de Usuarios</a>
                 </li>
-                <?php endif; ?>
-                <li class="nav-item">
-                    <a class="nav-link btn btn2-danger text-white ml-3" href="logout.php">Cerrar Sesión</a>
+                <?php } ?>
+                <li class="ml-auto">
+                    <a class="nav-link btn btn2  d-flex text-white " href="logout.php">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>

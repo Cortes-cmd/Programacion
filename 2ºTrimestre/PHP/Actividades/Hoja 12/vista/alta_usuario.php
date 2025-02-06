@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['usuario'];
     $password = $_POST['passwd'];
     $rol = $_POST['rol'];
+    
 
     $controller = new UsuariosController();
     $controller->AgregarUsuario($usuario, $password, $rol);
@@ -53,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="form-group">
                 <label for="Password">Password</label>
-                <input type="password" name="Password" id="Password" class="form-control" required>
+                <input type="password" name="passwd" id="passwd" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="rol">Rol</label>

@@ -9,9 +9,13 @@ require_once '../controlador/UsuariosController.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['usuario'];
     $password = $_POST['passwd'];
-    $rol = $_POST['rol'];
+    $rol = $_SESSION['rol'];
 
-    // Conectar a la base de datos
+    echo "Usuario: " . (isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'No establecido') . "<br>";
+    echo "Contraseña: " . (isset($_SESSION['passwd']) ? $_SESSION['passwd'] : 'No establecida') . "<br>";
+    echo "Rol: " . (isset($_SESSION['rol']) ? $_SESSION['rol'] : 'No establecido') . "<br>";
+
+     // Conectar a la base de datos
     $controller = new UsuariosController();
     $controller->VerificarUsuario($usuario, $password);
 

@@ -22,7 +22,7 @@ $socios = $controller->listarSocios();
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="Estilo.css">
+    <link rel="stylesheet" href="../vista/Estilo.css">
 </head>
 <body>
 
@@ -34,13 +34,15 @@ $socios = $controller->listarSocios();
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="lista_socios.php">Lista de Socios</a>
+                    <a class="nav-link " href="lista_socios.php">Lista de Socios</a>
                 </li>
-                <li class="nav-item">
+                <?php if ($_SESSION['rol'] === 'admin'){ 
+                echo '<li class="nav-item">
                     <a class="nav-link" href="lista_usuarios.php">Lista de Usuarios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn2-danger text-white ml-3" href="logout.php">Cerrar Sesión</a>
+                </li>';
+                }else{echo "No pasó por donde" ; } ?>
+                <li class="ml-auto">
+                    <a class="nav-link btn btn2  d-flex text-white " href="logout.php">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>
@@ -70,8 +72,10 @@ $socios = $controller->listarSocios();
                         <td><?= $socio['telefono'] ?></td>
                         <td><?= $socio['fecha_nacimiento'] ?></td>
                         <td>
+                            <?php if ($_SESSION['rol']) === 'admin'){echo '
                             <a href="editar_socio.php?id=<?= $socio['id_socio'] ?>" class="btn btn-primary btn-sm">Editar</a>
                             <a href="eliminar_socio.php?id=<?= $socio['id_socio'] ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                            '}?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -81,9 +85,7 @@ $socios = $controller->listarSocios();
             <a href="alta_socio.php" class="btn btn-success">Agregar un nuevo socio</a>
         </div>
     </div>
-    <!-- Integración de JavaScript de Bootstrap (opcional para funciones avanzadas) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
 
