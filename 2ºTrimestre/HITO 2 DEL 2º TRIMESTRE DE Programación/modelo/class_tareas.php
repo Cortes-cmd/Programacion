@@ -41,13 +41,13 @@ class Tarea {
         return $resultado->fetch_assoc();
     }
 
-    public function ActualizarTarea($email, $titulo, $descripcion, $estado) {
-        $query = "UPDATE tarea SET email = ?, titulo = ?, estado = ? WHERE email = ?";
+    public function ActualizarTarea($email, $titulo, $descripcion, $estado, $id_tarea) {
+        $query = "UPDATE tarea SET email = ?, titulo = ?, descripcion = ?, estado = ? WHERE id_tarea = ?";
         $stmt = $this->conexion->conexion->prepare($query);
-        $stmt->bind_param("ssss", $email, $titulo, $descripcion, $estado);
+        $stmt->bind_param("ssssi", $email, $titulo, $descripcion, $estado, $id_tarea);
 
         if ($stmt->execute()) {
-            echo "Tarea actualizado con éxito.";
+            echo "Tarea actualizada con éxito.";
         } else {
             echo "Error al actualizar tarea: " . $stmt->error;
         }

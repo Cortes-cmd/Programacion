@@ -20,8 +20,8 @@ class TareasController {
         return $this->modelo->ObtenerTareaPorEmail($email);
     }
 
-    public function ActualizarTarea($email, $titulo, $descripcion, $estado) {
-        $this->modelo->ActualizarTarea($email, $titulo, $descripcion, $estado);
+    public function ActualizarTarea($email, $titulo, $descripcion, $estado, $id_tarea) {
+        $this->modelo->ActualizarTarea($email, $titulo, $descripcion, $estado, $id_tarea);
     }
 
     public function EliminarTarea($email) {
