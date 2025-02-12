@@ -7,20 +7,17 @@ require_once '../controlador/UsuariosController.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuario = $_POST['usuario'];
+    $email = $_POST['email'];
     $password = $_POST['passwd'];
-    $rol = $_POST['rol'];
+    $nombre = $_POST['nombre'];
     
 
     $controller = new UsuariosController();
-    $controller->AgregarUsuario($usuario, $password, $rol);
+    $controller->AgregarUsuario($email, $nombre, $passwd);
 
-    // Redirecciona o muestra un mensaje de éxito
-    if ($_SESSION['usuario'] == 'admin' || $_SESSION['usuario'] == 'user') {
-    } else {
-        header("Location: ../index.php");
-        exit();
-    }
+   
+
+    
 }
 
 ?>
@@ -49,19 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1 class="text-center mb-4">Alta de Nuevo Usuario</h1>
         <form action="alta_usuario.php" method="post">
             <div class="form-group">
-                <label for="nombre">Usuario</label>
-                <input type="text" name="usuario" id="usuario" class="form-control" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="Password">Password</label>
                 <input type="password" name="passwd" id="passwd" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="rol">Rol</label>
-                <select name="rol" id="rol" class="form-control" required>
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                </select>
+                <label for="nombre">Nombre</label>
+                <input type="nombre" name="nombre" id="nombre" class="form-control" required>
             </div>
             <div class="d-flex justify-content-center align-items-center">
                 <button type="submit" class="btn btn1-purple">Guardar</button>

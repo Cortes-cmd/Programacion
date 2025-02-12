@@ -10,7 +10,7 @@ class Usuario {
 
     public function AgregarUsuario($usuario,$password,$rol) {
 
-        $query = "INSERT INTO usuario (usuario,passwd,rol) VALUES (?, ?, ?)";
+        $query = "INSERT INTO usuario(usuario,passwd,rol) VALUES (?, ?, ?)";
         $stmt = $this->conexion->conexion->prepare($query);
         $stmt->bind_param("sss", $usuario,$password,$rol);
 
@@ -43,7 +43,7 @@ class Usuario {
     }
 
     public function ActualizarUsuario($id_usuario, $usuario, $password, $rol) {
-        $query = "UPDATE usuario SET usuario = ?, passw = ?, rol = ? WHERE id_usuario = ?";
+        $query = "UPDATE usuario SET usuario = ?, passwd = ?, rol = ? WHERE id_usuario = ?";
         $stmt = $this->conexion->conexion->prepare($query);
         $stmt->bind_param("sssi", $usuario, $password, $rol, $id_usuario);
 
@@ -89,6 +89,8 @@ class Usuario {
             $fila = $resultado->fetch_assoc();
             $_SESSION['usuario'] = $fila['usuario'];
             $_SESSION['passwd'] = $fila['passwd'];
+            $_SESSION['rol'] = $fila['rol'];
+
             header("Location: ../index.php");
             echo "Bienvenido, " . $_SESSION['usuario'] . "<br>";
             exit();

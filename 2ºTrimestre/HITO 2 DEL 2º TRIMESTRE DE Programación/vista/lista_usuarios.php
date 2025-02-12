@@ -33,9 +33,6 @@ $usuarios = $controller->ListarUsuarios();
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="lista_socios.php">Lista de Socios</a>
-                </li>
                 <?php if ($_SESSION['rol'] == 'admin'){ ?>
                 <li class="nav-item">
                     <a class="nav-link" href="lista_usuarios.php">Lista de Usuarios</a>
@@ -53,20 +50,18 @@ $usuarios = $controller->ListarUsuarios();
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
-                    <th>Usuario</th>
+                    <th>Nombre</th>
                     <th>Password</th>
-                    <th>Rol</th>
+                    <th>Email</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($usuarios as $usuario): ?>
                     <tr>
-                        <td><?= $usuario['id_usuario'] ?></td>
-                        <td><?= $usuario['usuario'] ?></td>
+                        <td><?= $usuario['nombre'] ?></td>
                         <td><?= $usuario['passwd'] ?></td>
-                        <td><?= $usuario['rol'] ?></td>
+                        <td><?= $usuario['email'] ?></td>
                         <td>
                             <a href="editar_usuario.php?id=<?= $usuario['id_usuario'] ?>" class="btn btn-primary btn-sm">Editar</a>
                             <a href="eliminar_usuario.php?id=<?= $usuario['id_usuario'] ?>" class="btn btn-danger btn-sm">Eliminar</a>
