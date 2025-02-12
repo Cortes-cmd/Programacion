@@ -64,14 +64,35 @@
     padding: 1.5%;
 }
 
-.login-btn{
-
+.login-btn {
     font-family: "Artifika", serif;
     font-weight: 400;
     font-style: normal;
+    background-color: bisque;
+    padding: 10px 20px;
+    margin-bottom: 35px; /* Añadido para separar los elementos */
+}
+
+
+.login-btn1 {
+    font-family: "Artifika", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: bisque;
+    padding: 10px 20px;
+    color: white;
 }
 
 .login-body{
 
     background-color: #351111;
+}
+
+.btn-4{
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    color: white;
+    font-size: 16px;
+    align-items: center;
+    margin-top: 4%;
 }

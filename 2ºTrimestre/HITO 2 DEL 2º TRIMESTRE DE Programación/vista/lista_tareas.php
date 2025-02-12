@@ -5,7 +5,7 @@ error_reporting(E_ERROR);
 
 require_once '../controlador/TareasController.php';
 $controller = new TareasController();
-$socios = $controller->listarTareas();
+$tareas = $controller->listarTareas();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -30,7 +30,7 @@ $socios = $controller->listarTareas();
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="../index.php">Gestión de Usuarios</a>
+        <a class="navbar-brand" href="../index.php">Gestión de Tareas</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -56,6 +56,7 @@ $socios = $controller->listarTareas();
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
+                    <th>ID</th>
                     <th>Email</th>
                     <th>Título</th>
                     <th>Descripción</th>
@@ -68,34 +69,34 @@ $socios = $controller->listarTareas();
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($socios as $socio): ?>
+                <?php foreach ($tareas as $tarea): ?>
                     <tr>
-                        <td><?= $socio['id_socio'] ?></td>
-                        <td><?= $socio['nombre'] ?></td>
-                        <td><?= $socio['apellido'] ?></td>
-                        <td><?= $socio['email'] ?></td>
-                        <td><?= $socio['telefono'] ?></td>
-                        <td><?= $socio['fecha_nacimiento'] ?></td>
+                        <td><?= $tarea['id_tarea'] ?></td>
+                        <td><?= $tarea['email'] ?></td>
+                        <td><?= $tarea['titulo'] ?></td>
+                        <td><?= $tarea['descripcion'] ?></td>
+                        <td><?= $tarea['estado'] ?></td>
+
 
                         <?php //if ($_SESSION['rol'] === 'admin') { ?>
-                            <td>
-                                <button class="btn btn-danger mb-3">
-                                    <a href="eliminar_tarea.php?id=<?php $socio['id_socio'] ?>" >Eliminar</a>
+                           <td><!-- 
+                                <button class="btn btn-3 mb-3">
+                                    <a href="eliminar_tarea.php?id=<?php $tarea['id_tarea'] ?>" >Eliminar</a>
+                                </button>-->
+                                <button class="btn btn-4 mb-3">
+                                    <a href="editar_tarea.php?id=<?php $tarea['id_tarea'] ?>" >Editar</a>
                                 </button>
-                                <button class="btn btn-danger mb-3">
-                                    <a href="editar_tarea.php?id=<?php $socio['id_socio'] ?>" >Editar</a>
-                                </button>
-                            </td>
+                            </td> 
                         <?php //}else{ echo "";}?>                 
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <?php if ($_SESSION['rol'] === 'admin') { ?>
+        <?php // if ($_SESSION['rol'] === 'admin') { ?>
             <div class="text-center ">
-                <a href="alta_socio.php" class="btn btn3">Agregar un nuevo socio</a>
+                <a href="alta_tarea.php" class="btn btn3">Agregar nueva tarea</a>
             </div>
-            <?php }else{ echo "";}?> 
+            <?php // }else{ echo "";}?> 
     </div>
 </body>
 </html>

@@ -3,10 +3,11 @@ session_start();
 session_regenerate_id(true);
 error_reporting(E_ERROR);
 
-require_once '../controlador/UsuariosController.php';
+require_once '../controlador/TareasController.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id_tarea = $_POST['id_tarea'];
     $email = $_POST['email'];
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
@@ -14,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     $controller = new TareasController;
-    $controller->ActualizarTarea($email, $titulo, $descripcion, $estado);
+    $controller->ActualizarTarea($email, $titulo, $descripcion, $estado, $id_tarea);
 
     if($_SESSION['usuario']=='user'){
 
@@ -51,37 +52,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 <div class="container mt-5">
-        <h1 class="text-center mb-4">Editar Socio</h1>
-        <form action="editar_socio.php" method="post">
-            <div class="form-group">
-                <label for="id_cliente">ID</label>
-                <input type="text" name="id_cliente" id="id_cliente" class="form-control" required>
+        <h1 class="text-center mb-4">Editar Tarea</h1>
+        <form action="editar_tarea.php" method="post">
+         <div class="form-group">
+                <label for="id">Id_Tarea</label>
+                <input type="text" name="id_tarea" id="id_tarea" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" id="apellido" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
+                <label for="nombre">Email</label>
                 <input type="email" name="email" id="email" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="text" name="telefono" id="telefono" class="form-control" required>
+                <label for="titulo">Título</label>
+                <input type="text" name="titulo" id="titulo" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="fecha_nacimiento">Fecha de Nacimiento</label>
-                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required>
+                <label for="descripcion">Descripción</label>
+                <input type="text" name="descripcion" id="descripcion" class="form-control" required>
             </div>
-            <link rel="stylesheet" href="Estilo.css">
-            <div class="d-flex justify-content-center align-items-center">
-                <button type="submit" class="btn btn1-purple">Actualizar</button>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <select name="estado" id="estado" class="form-control" onchange="actualizarEstado(this.value)">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="En proceso">En proceso</option>
+                    <option value="Bloqueada">Bloqueada</option>
+                    <option value="Finalizada">Finalizada</option>
+                </select>
             </div>
-
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn1-purple">Guardar</button>
+            </div>
         </form>
     </div>
 </body>

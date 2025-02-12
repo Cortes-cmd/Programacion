@@ -49,24 +49,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1 class="text-center mb-4">Alta de Nueva Tarea</h1>
         <form action="alta_tarea.php" method="post">
             <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" id="apellido" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
+                <label for="nombre">Email</label>
                 <input type="email" name="email" id="email" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="text" name="telefono" id="telefono" class="form-control" required>
+                <label for="titulo">Título</label>
+                <input type="text" name="titulo" id="titulo" class="form-control" required>
             </div>
             <div class="form-group">
-                <label for="fecha_nacimiento">Fecha de Nacimiento</label>
-                <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required>
+                <label for="descripcion">Descripción</label>
+                <input type="text" name="descripcion" id="descripcion" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <select name="estado" id="estado" class="form-control" onchange="actualizarEstado(this.value)">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="En proceso">En proceso</option>
+                    <option value="Bloqueada">Bloqueada</option>
+                    <option value="Finalizada">Finalizada</option>
+                </select>
             </div>
             <div class="text-center mt-3">
             <button type="submit" class="btn btn1-purple">Guardar</button>
