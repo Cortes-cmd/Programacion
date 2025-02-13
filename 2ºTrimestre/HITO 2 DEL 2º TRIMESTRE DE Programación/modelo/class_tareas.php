@@ -68,5 +68,30 @@ class Tarea {
 
         $stmt->close();
     }
+
+    public function ActualizarEstado($id_tarea, $estado) {
+        $query = "UPDATE tarea SET estado = ? WHERE id_tarea = ?";
+        $stmt = $this->conexion->conexion->prepare($query);
+        $stmt->bind_param("si", $estado, $id_tarea);
+
+        if ($stmt->execute()) {
+            echo "Estado actualizado con éxito.";
+        } else {
+            echo "Error al actualizar estado: " . $stmt->error;
+        }
+
+        $stmt->close();
+    }
+
+    public function ObtenerTareasPorEmail($email) {
+        $query = "SELECT * FROM tarea WHERE email = ?";
+        $stmt = $this->conexion->conexion->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tareas = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $tareas;
+    }
 }
 ?>
