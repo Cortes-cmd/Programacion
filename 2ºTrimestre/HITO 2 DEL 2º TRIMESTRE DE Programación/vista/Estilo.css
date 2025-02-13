@@ -96,3 +96,12 @@
     align-items: center;
     margin-top: 4%;
 }
+
+.btn-primary-1{
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    color: white;
+    font-size: 16px;
+    align-items: center;
+    margin-top: 4%;
+}
