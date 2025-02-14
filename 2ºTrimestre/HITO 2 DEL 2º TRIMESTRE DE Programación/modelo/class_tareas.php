@@ -31,7 +31,7 @@ class Tarea {
         }
         return $socios;
     }
-
+//set('Comenzada','En_Curso','Pausada','Completada','Cancelada')
     public function ObtenerTareaPorEmail($email) {
         $query = "SELECT * FROM tarea WHERE email = ?";
         $stmt = $this->conexion->conexion->prepare($query);
@@ -55,10 +55,10 @@ class Tarea {
         $stmt->close();
     }
 
-    public function EliminarTarea($email) {
-        $query = "DELETE FROM tarea WHERE email = ?";
+    public function EliminarTarea($id_tarea) {
+        $query = "DELETE FROM tarea WHERE id_tarea = ?";
         $stmt = $this->conexion->conexion->prepare($query);
-        $stmt->bind_param("s", $email);
+        $stmt->bind_param("i", $id_tarea);
 
         if ($stmt->execute()) {
             echo "Tarea eliminado con éxito.";

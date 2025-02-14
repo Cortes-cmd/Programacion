@@ -15,3 +15,13 @@ function actualizarEstado(id_tarea, estado) {
     };
     xhr.send("id_tarea=" + encodeURIComponent(id_tarea) + "&estado=" + encodeURIComponent(estado));
 }
+
+function enabler(){
+
+    const button = document.getElementById("button");
+    const check = document.getElementById("checkbox");
+
+    button.disabled = !check.checked;
+
+
+}

@@ -4,24 +4,25 @@ session_regenerate_id(true);
 error_reporting(E_ERROR);
 
 require_once '../controlador/TareasController.php';
+ // Redirecciona o muestra un mensaje de éxito
+ if($_SESSION['usuario']=='user'){
+
+} else{
+     header("Location: ../index.php");
+     exit();    
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
     $estado = $_POST['estado'];
-
+    $email = $_SESSION['email'];
 
     $controller = new TareasController();
     $controller->AgregarTarea($email, $titulo, $descripcion, $estado);
 
-    // Redirecciona o muestra un mensaje de éxito
-    if($_SESSION['usuario']=='user'){
-
-    } else{
-        header("Location: ../index.php");
-        exit();  
-    }
+   header("Location: ../index.php");
+     exit();    
 
 
 }
@@ -45,10 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container mt-5">
         <h1 class="text-center mb-4">Alta de Nueva Tarea</h1>
         <form action="alta_tarea.php" method="post">
-            <div class="form-group">
-                <label for="nombre">Email</label>
-                <input type="email" name="email" id="email" class="form-control" required>
-            </div>
             <div class="form-group">
                 <label for="titulo">Título</label>
                 <input type="text" name="titulo" id="titulo" class="form-control" required>

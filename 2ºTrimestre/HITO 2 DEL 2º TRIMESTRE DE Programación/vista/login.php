@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && $email == $user['email'] && password_verify($password, $user['passwd'])) {
         //Guardamos los datos del usuario en la sesión
         $_SESSION['usuario'] = 'user';
-        $_SESSION['nombre'] = $user['usuario'];
+        $_SESSION['nombre'] = $user['nombre'];
         $_SESSION['email'] = $user['email'];
         //Redirigimos a la página de inicio
         header("Location: lista_tareas.php");

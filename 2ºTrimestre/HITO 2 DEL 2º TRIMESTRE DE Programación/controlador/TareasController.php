@@ -20,8 +20,8 @@ class TareasController {
         $this->modelo->ActualizarTarea($email, $titulo, $descripcion, $estado, $id_tarea);
     }
 
-    public function EliminarTarea($email) {
-        $this->modelo->EliminarTarea($email);
+    public function EliminarTarea($id_tarea) {
+        $this->modelo->EliminarTarea($id_tarea);
     }
 
     public function actualizarEstado($id_tarea, $estado) {
