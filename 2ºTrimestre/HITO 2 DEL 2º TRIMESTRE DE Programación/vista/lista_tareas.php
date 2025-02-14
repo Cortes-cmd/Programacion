@@ -5,7 +5,10 @@ error_reporting(E_ERROR);
 
 require_once '../controlador/TareasController.php';
 $controller = new TareasController(); 
+
 $email = $_SESSION['email']; 
+
+
 $tareas = $controller->ListarTareasPorEmail($email); 
 ?>
 <!DOCTYPE html>
@@ -40,6 +43,9 @@ $tareas = $controller->ListarTareasPorEmail($email);
                 <li class="ml-auto">
                     <a class="nav-link btn btn2 d-flex text-white" href="logout.php">Cerrar Sesión</a>
                 </li>
+                <li class="nav-item-Bienvenida">
+                    <h5 class="h5-Bienvenida">Bienvenido <?php echo $_SESSION['nombre']; ?>!</h5>
+                </li>
                 <p><?//php// echo $_SESSION['email']; ?></p>
             </ul>
         </div>
@@ -50,7 +56,6 @@ $tareas = $controller->ListarTareasPorEmail($email);
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
                     <th>Email</th>
                     <th>Título</th>
                     <th>Descripción</th>
@@ -61,7 +66,6 @@ $tareas = $controller->ListarTareasPorEmail($email);
             <tbody>
                 <?php foreach ($tareas as $tarea): ?>
                     <tr>
-                        <td><?= $tarea['id_tarea'] ?></td>
                         <td><?= $tarea['email'] ?></td>
                         <td><?= $tarea['titulo'] ?></td>
                         <td><?= $tarea['descripcion'] ?></td>
@@ -75,18 +79,16 @@ $tareas = $controller->ListarTareasPorEmail($email);
                         </td>
                         <td>
                             <button class="btn btn-primary-1 mb-3">
-                                <a href="editar_tarea.php?id=<?= $tarea['id_tarea'] ?>">Editar</a>
+                                <a href="eliminar_tarea.php?id=<?= $tarea['id_tarea'] ?>">Eliminar</a>
                             </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <?php if ($_SESSION['rol'] === 'admin') { ?>
-            <div class="text-center">
-                <a href="alta_tarea.php" class="btn btn3">Agregar nueva tarea</a>
-            </div>
-        <?php } ?>
+        <div class="text-center">
+            <a href="alta_tarea.php" class="btn btn3">Agregar nueva tarea</a>
+        </div>
     </div>
 </body>
 

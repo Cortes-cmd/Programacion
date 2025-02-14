@@ -10,14 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['passwd'];
     $nombre = $_POST['nombre'];
-    
+
 
     $controller = new UsuariosController();
     $controller->AgregarUsuario($email, $nombre, $passwd);
-
-   
-
-    
 }
 
 ?>
@@ -53,10 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="nombre">Nombre</label>
                 <input type="nombre" name="nombre" id="nombre" class="form-control" required>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
-                <button type="submit" class="btn btn1-purple">Guardar</button>
+            <div class="form-group form-check" >
+                <input type="checkbox" name="terminos" id="checkbox" onchange="enabler()" class="form-check-input" required>
+                <label for="aceptar_terminos" class="form-check-label">Acepto los términos de uso</a></label>
             </div>
-            
+            <div class="d-flex justify-content-center align-items-center">
+                <button id= "button" type="submit" class="btn btn1-purple" disabled>Guardar</button>
+            </div>
+
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
