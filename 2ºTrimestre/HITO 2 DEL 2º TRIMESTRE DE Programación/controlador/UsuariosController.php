@@ -1,27 +1,25 @@
 <?php
-require_once '../modelo/class_usuario.php';
+//Referencio a la clase Usuario para usar sus metodos como en el archivo anterior
+require_once '../modelo/class_usuario.php'; 
 
 class UsuariosController {
     private $modelo;
 
+    // Constructor de la clase
     public function __construct() {
-        $this->modelo = new Usuario();
+        $this->modelo = new Usuario(); // Crea una nueva instancia del modelo
     }
 
-    public function AgregarUsuario($email,$nombre,$password) {
-        $this->modelo->AgregarUsuario($email,$nombre,$password);
+    // Método para agregar un nuevo usuario
+    public function AgregarUsuario($email, $nombre, $password) {
+        $this->modelo->AgregarUsuario($email, $nombre, $password);
     }
-
-    public function ListarUsuarios() {
-        return $this->modelo->ObtenerUsuarios();
-    }
-
+    
+    // Método para obtener un usuario por su correo electrónico único
     public function ObtenerUsuarioPorEmail($email) {
         return $this->modelo->ObtenerUsuarioPorEmail($email);
     }
 
-    public function VerificarUsuario($email, $password) {
-        return $this->modelo->VerificarUsuario($email, $password);
-    }
+  
 }
 ?>
