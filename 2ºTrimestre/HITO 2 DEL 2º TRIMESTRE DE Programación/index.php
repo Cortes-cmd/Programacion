@@ -1,24 +1,20 @@
 <?php
-session_start();
-session_regenerate_id(true);
-error_reporting(E_ERROR);
+// Inicia la sesión
+session_start(); 
+// Regenera el ID de la sesión para mayor seguridad
+session_regenerate_id(true); 
+// Configura el nivel de reporte de errores para mostrar solo errores graves
+error_reporting(E_ERROR); 
 
-// Depuración: Mostrar los valores de las variables de sesión
-echo "Usuario: " . (isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'No establecido') . "<br>";
-echo "Contraseña: " . (isset($_SESSION['passwd']) ? $_SESSION['passwd'] : 'No establecida') . "<br>";
-echo "email: " . (isset($_SESSION['email']) ? $_SESSION['email'] : 'No establecido') . "<br>";
-
-
-if ($_SESSION['usuario'] == 'user' ){
-
-
+// Verifica si el usuario está autenticado
+if ($_SESSION['usuario'] == 'user') {
+    // Redirige a la lista de tareas si el usuario está autenticado
     header("Location: vista/lista_tareas.php");
-
-} else{
-
+} else {
+    // Redirige a la página de inicio de sesión si el usuario no está autenticado
     header("Location: vista/login.php");
-
 }
 
-
+// Finaliza el script
+exit();
 ?>

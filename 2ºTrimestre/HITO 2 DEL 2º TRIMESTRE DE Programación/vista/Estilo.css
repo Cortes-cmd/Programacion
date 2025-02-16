@@ -1,79 +1,79 @@
+/* Botón con fondo púrpura */
 .btn1-purple {
-    background-color: #6f42c1 ;
-    border-color: #6f42c1 ;
-    color: white ;
-    padding: 1% 2% ;
-    margin-top: 5% ;
-    font-size: 16px ;
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    color: white;
+    padding: 1% 2%;
+    margin-top: 5%;
+    font-size: 16px;
     align-items: center;
 }
 
+/* Botón con fondo rojo */
 .btn2 {
     background-color: #dc3545;
     border-color: #dc3545;
     color: white;
-    padding: 12px 78px ; /* Ajuste de padding para mejor apariencia */
+    padding: 12px 78px;
     font-size: 16px;
     display: block;
     align-items: center;
     margin-top: 4%;
 }
 
-.nav-item{
+/* Estilo para los elementos de navegación */
+.nav-item {
     padding: 6px 6px;
 }
 
-
-.navbar-brand{
-    padding:  9px;
+/* Estilo para la marca de la barra de navegación */
+.navbar-brand {
+    padding: 9px;
 }
 
-.btn3{
+/* Botón con fondo verde */
+.btn3 {
     color: white;
     background-color: green;
     margin-bottom: 5%;
 }
 
-.login-form{
-
+/* Estilo para el formulario de inicio de sesión */
+.login-form {
     font-family: "Artifika", serif;
     font-weight: 400;
     font-style: normal;
-    
     margin-top: 7%;
     color: #ffe4df;
     text-align: center;
-
 }
 
-
-  
-
-.login.title{
-
+/* Estilo para el título del formulario de inicio de sesión */
+.login.title {
     padding: 1.5%;
 }
 
-.login-user{
-
+/* Estilo para el campo de usuario del formulario de inicio de sesión */
+.login-user {
     padding: 1.5%;
 }
 
-.login-passwd{
-
+/* Estilo para el campo de contraseña del formulario de inicio de sesión */
+.login-passwd {
     padding: 1.5%;
 }
 
+/* Estilo para el botón del formulario de inicio de sesión */
 .login-btn {
     font-family: "Artifika", serif;
     font-weight: 400;
     font-style: normal;
     background-color: bisque;
     padding: 10px 20px;
-    margin-bottom: 35px; /* Añadido para separar los elementos */
+    margin-bottom: 35px; 
 }
 
-
+/* Estilo alternativo para el botón del formulario de inicio de sesión */
 .login-btn1 {
     font-family: "Artifika", serif;
     font-weight: 400;
@@ -83,12 +83,13 @@
     color: white;
 }
 
-.login-body{
-
+/* Estilo para el cuerpo del formulario de inicio de sesión */
+.login-body {
     background-color: #351111;
 }
 
-.btn-4{
+/* Botón con fondo púrpura */
+.btn-4 {
     background-color: #6f42c1;
     border-color: #6f42c1;
     color: white;
@@ -97,7 +98,8 @@
     margin-top: 4%;
 }
 
-.btn-primary-1{
+/* Botón primario con fondo púrpura */
+.btn-primary-1 {
     background-color: #6f42c1;
     border-color: #6f42c1;
     color: white;
@@ -106,15 +108,15 @@
     margin-top: 4%;
 }
 
-.btn3{
-
-color: white;
-background-color: rgb(136, 39, 182);
-margin-top: 4%;
-
+/* Botón con fondo púrpura oscuro */
+.btn3 {
+    color: white;
+    background-color: rgb(136, 39, 182);
+    margin-top: 4%;
 }
 
-.h5-Bienvenida{
+/* Estilo para el mensaje de bienvenida */
+.h5-Bienvenida {
     color: white;
     margin-left: 12%;
     align-items: center;
