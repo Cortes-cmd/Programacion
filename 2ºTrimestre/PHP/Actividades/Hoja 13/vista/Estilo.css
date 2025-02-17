@@ -1,0 +1,43 @@
+.btn1-purple {
+    background-color: #6f42c1 ;
+    border-color: #6f42c1 ;
+    color: white ;
+    padding: 1% 2% ;
+    margin-top: 5% ;
+    font-size: 16px ;
+    align-items: center;
+}
+
+.btn2 {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+    padding: 12px 78px ; /* Ajuste de padding para mejor apariencia */
+    font-size: 16px;
+    display: block;
+    align-items: center;
+    margin-top: 4%;
+
+
+}
+
+.nav-item{
+
+    padding: 6px 6px;
+
+
+
+}
+
+
+.navbar-brand{
+
+
+
+    padding:  9px;
+
+
+
+
+
+}
