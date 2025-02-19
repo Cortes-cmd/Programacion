@@ -1,27 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- Integración de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZwv-model-vue1T"crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="vista/Estilo.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.php">Recetas disponibles</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="vista/lista_recetas.php">Lista de Recetas</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</body>
+
 <?php
 session_start();
 session_regenerate_id(true);
 error_reporting(E_ERROR);
-
-// Depuración: Mostrar los valores de las variables de sesión
-//echo "Usuario: " . (isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'No establecido') . "<br>";
-//echo "Contraseña: " . (isset($_SESSION['passwd']) ? $_SESSION['passwd'] : 'No establecida') . "<br>";
-//echo "Rol: " . (isset($_SESSION['rol']) ? $_SESSION['rol'] : 'No establecido') . "<br>";
-
-
-//if (isset($_SESSION['usuario']) && $_SESSION['usuario'] == 'admin' && isset($_SESSION['passwd']) && $_SESSION['passwd'] == '1234'&& isset($_SESSION['rol']) && $_SESSION['rol'] == 'admin') {
-
-  //  header("Location: vista/lista_usuarios.php");
- //  exit();
-//} elseif (isset($_SESSION['usuario']) && $_SESSION['usuario'] == 'ACD' && isset($_SESSION['passwd']) && $_SESSION['passwd'] == '5678') {
-
-  //  header("Location: vista/lista_socios.php");
- //    exit();
-//} else {
- //   echo "Aun necesitas identificarte!";
- //   header("Location: vista/login.php");
- //   exit();
-//}
 
 // 1. Configuración: Definimos el puerto y construimos la URL local.
 // Dado que LM Studio se ejecuta en local, usamos 'localhost'.
@@ -32,9 +45,9 @@ $url = "http://localhost:$puerto/v1/completions";  // Asegúrate de que este end
 // 2. Preparar los datos a enviar.
 // Creamos un array con la información que queremos enviar al modelo.
 // En este ejemplo, enviamos un mensaje (prompt) y configuramos un parámetro como el número máximo de tokens.
-$datos = array( 
-    'prompt' => 'Dame 1 entrante que use tortilla y pimiento rojo',  // Mensaje que se envía al modelo.
-    'max_tokens' => 300// Número máximo de tokens en la respuesta.
+$datos = array(
+    'prompt' => 'todos los mamiferos tienen patas?',  // Mensaje que se envía al modelo.
+    'max_tokens' => 100// Número máximo de tokens en la respuesta.
 );
 
 // Convertir el array a formato JSON.
@@ -73,3 +86,50 @@ if (curl_errno($ch)) {
 curl_close($ch);
 ?>
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Asistente de Recetas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Asistente de Recetas IA</h2>
+        <div class="mb-3">
+            <label for="pregunta" class="form-label">Escribe tu solicitud:</label>
+            <input type="text" class="form-control" id="pregunta" placeholder="Ej. Dame una receta de pasta con champiñones">
+        </div>
+        <button class="btn btn-primary" id="enviar">Enviar</button>
+        <div id="respuesta" class="mt-3"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#enviar').click(function() {
+                var pregunta = $('#pregunta').val();
+                if (pregunta.trim() === '') {
+                    alert('Por favor, ingresa una pregunta');
+                    return;
+                }
+                
+                $.ajax({
+                    url: '../index.php',
+                    type: 'POST',
+                    data: { pregunta: pregunta },
+                    success: function(response) {
+                        $('#respuesta').html('<strong>Respuesta:</strong><br>' + response);
+                    },
+                    error: function() {
+                        $('#respuesta').html('<strong>Error:</strong> No se pudo obtener una respuesta.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
