@@ -8,16 +8,8 @@
 }
 
 
-.nav-link{
 
-    color: purple;
-
-
-
-}
-
-
-.nav-item{
+.nav-item-1{
 
     color: purple;
 
@@ -25,6 +17,12 @@
 
 
 }
+
+.nav-link-1{
+
+    color: purple;
+}
+
 #respuesta {
     margin-top: 20px;
     padding: 10px;
