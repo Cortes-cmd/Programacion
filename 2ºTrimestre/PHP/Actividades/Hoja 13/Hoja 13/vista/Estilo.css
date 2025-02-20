@@ -1,0 +1,32 @@
+
+.navbar-brand{
+
+    margin-left: 1%;
+    
+
+
+}
+
+
+
+.nav-item-1{
+
+    color: purple;
+
+
+
+
+}
+
+.nav-link-1{
+
+    color: purple;
+}
+
+#respuesta {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color:rgb(19, 131, 43);
+}
