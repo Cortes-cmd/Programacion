@@ -1,0 +1,10 @@
+package misUtilidades
+
+public class  Mensaje{
+
+	public void saludo(String[] args){
+
+		System.out.println("Yeyo yeyo");
+
+	}
+}
