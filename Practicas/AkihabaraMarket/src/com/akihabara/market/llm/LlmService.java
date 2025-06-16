@@ -27,7 +27,7 @@ public class LlmService {
 	
 	public String  sugerirNombreProducto( String tipo, String  franquicia) {
 		
-        String apiKey = "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";  
+        String apiKey = "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";  
         String prompt = "Sugiere sólamente un nombre llamativo y original para un producto otaku del tipo" + tipo+" basado en la franquicia" + franquicia+"\n"+"No me introduzcas lo que dirás al principio de tu respuesta, empieza con el nombre directamente";
 
 		
